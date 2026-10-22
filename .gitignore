@@ -6,6 +6,8 @@ dist/
 .env.local
 .env.*.local
 *.log
+__pycache__/
+*.pyc
 
 # Local FTP credentials
 /output/deployment/Si-Tcha-AI-LWS-FileZilla.xml

@@ -31,6 +31,8 @@ jobs:
         env:
           VITE_WEGLOT_API_KEY: ${{ secrets.VITE_WEGLOT_API_KEY }}
       - run: npm run check:seo
+      - name: Vérifier la sécurité du transfert FTPS
+        run: python3 -m unittest discover -s scripts -p "test_deploy_lws.py"
       - uses: actions/upload-artifact@v4
         with:
           name: site-lws
@@ -59,3 +61,4 @@ jobs:
           LWS_FTP_USER: ${{ secrets.LWS_FTP_USER }}
           LWS_FTP_PASSWORD: ${{ secrets.LWS_FTP_PASSWORD }}
           LWS_FTP_DIR: ${{ secrets.LWS_FTP_DIR }}
+          LWS_FTP_CERT_SHA256: ${{ secrets.LWS_FTP_CERT_SHA256 }}

@@ -26,11 +26,14 @@ Pour publier, ajouter dans GitHub → Settings → Secrets and variables → Act
 | `LWS_FTP_USER` | Identifiant FTP de l'hébergement. |
 | `LWS_FTP_PASSWORD` | Mot de passe FTP, à saisir directement dans GitHub. |
 | `LWS_FTP_DIR` | Chemin FTP absolu du dossier existant `si-tcha.com`, à confirmer après connexion. Ne pas deviner le chemin ni utiliser `/` ou `/htdocs`. |
+| `LWS_FTP_CERT_SHA256` | Facultatif : empreinte SHA-256 du certificat FTP préalablement approuvé, lorsque son nom ne correspond pas à `ftp.laretine.org`. Copier la valeur du certificat de confiance dans FileZilla, pas une empreinte provenant d'une connexion inconnue. Les deux-points et espaces sont acceptés. |
 | `VITE_WEGLOT_API_KEY` | Clé publique de l'intégration Weglot, nécessaire au sélecteur de l'accueil. |
 
 Faire une sauvegarde de la version en ligne avant la première publication. Lancer ensuite Actions → Site Si-Tcha AI — LWS → Run workflow, en cochant l'option de publication. Après validation de ce premier déploiement, créer la variable de dépôt `LWS_DEPLOY_ENABLED` avec la valeur `true` pour publier automatiquement les prochains envois sur `main`.
 
-Sans cette variable, les envois compilent et vérifient le site mais ne le publient pas. Le transfert utilise FTPS explicite sur le port 21, avec contrôle de la chaîne de certificat et du nom d'hôte ; aucune désactivation TLS n'est prévue. Le script exige un dossier existant nommé `si-tcha.com`, charge ses fichiers et ne supprime aucun fichier distant. Il ne remplace pas la sauvegarde préalable. Le workflow doit encore être envoyé sur GitHub et configuré ; il n'a pas été exécuté sur le serveur LWS.
+Sans cette variable, les envois compilent et vérifient le site mais ne le publient pas. Le transfert utilise FTPS explicite sur le port 21. Par défaut, il vérifie la chaîne de certificat et le nom d'hôte. Si `LWS_FTP_CERT_SHA256` est renseigné, la vérification du nom est remplacée par la correspondance exacte de cette empreinte ; la chaîne d'autorités et la validité du certificat restent contrôlées. L'empreinte est vérifiée avant l'envoi des identifiants et sur les connexions de transfert. Une empreinte différente arrête la publication ; un renouvellement de certificat nécessite de vérifier puis mettre à jour la valeur. Ne pas remplacer cette vérification par `CERT_NONE`.
+
+Les sept tests de sécurité se lancent avec `python -m unittest discover -s scripts -p test_deploy_lws.py` et sont également exécutés dans le workflow. Ils ne se connectent pas à LWS. Le script exige un dossier existant nommé `si-tcha.com`, charge ses fichiers et ne supprime aucun fichier distant. Il ne remplace pas la sauvegarde préalable. Le correctif doit être envoyé sur GitHub et configuré ; sa connexion réelle à LWS reste à valider.
 
 ## Ce que produit le projet
 
