@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "./components/sections/Navbar";
 import HeroSection from "./components/sections/HeroSection";
-import GicDirectorySection from "./components/sections/GicDirectorySection";
 import AboutSection from "./components/sections/AboutSection";
 import PartnersSection from "./components/sections/PartnersSection";
 import ContactSection from "./components/sections/ContactSection";
@@ -34,7 +33,6 @@ export default function App({ path = "/" }: { path?: string }) {
       <Navbar theme={theme} setTheme={setTheme} />
       <main id="main-content">
       <HeroSection />
-      <GicDirectorySection />
       <AboutSection />
       <AudienceSection />
       <InvestorsSection />

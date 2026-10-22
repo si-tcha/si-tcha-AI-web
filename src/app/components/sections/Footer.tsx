@@ -47,7 +47,7 @@ export default function Footer() {
               {"Sitemap"}
             </div>
             <div className="flex flex-col gap-2.5">
-              {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((link) => (
+              {["Home", "About", "Investors", "Partners", "Contact"].map((link) => (
                 <a key={link} href={navLinks[link] || "#"}
                   className="text-sm transition-colors"
                   style={{ color: "rgba(255,255,255,0.72)" }}
@@ -78,7 +78,7 @@ export default function Footer() {
         <div translate="no" lang={lang} className="react-interactive mb-10 pt-8 border-t border-white/10">
           <p className="font-semibold mb-4">{lang === "fr" ? "Découvrir Si-Tcha AI" : "Explore Si-Tcha AI"}</p>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-            {seoPages.filter(page => page.lang === lang).map(page => (
+            {seoPages.filter(page => page.lang === lang && !["/en/pilot/", "/fr/pilote/"].includes(page.path)).map(page => (
               <li key={page.path}>
                 <a className="hover:underline underline-offset-4" href={page.path} hrefLang={lang}>
                   {pageLabels[page.path.split("/")[2]]}

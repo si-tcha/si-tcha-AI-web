@@ -1,13 +1,10 @@
-import { useWeglot } from "../../hooks/useWeglot";
 import FarmerDashboard from "./FarmerDashboard";
 import { ArrowRight, Zap } from "lucide-react";
 import BackgroundArea from "@/assets/area.webp";
 
 export default function HeroSection() {
-  const { lang } = useWeglot();
-  const t = (en: string, fr: string) => lang === "fr" ? fr : en;
   return (
-    <section translate="no" className="hero-section compact-section relative min-h-screen flex items-center overflow-hidden">
+    <section className="hero-section relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0" style={{ background: "var(--background)" }}>
         <img
@@ -30,47 +27,47 @@ export default function HeroSection() {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-6 grid grid-cols-1 lg:grid-cols-[1fr_390px] gap-5 lg:gap-10 items-center w-full">
+      <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-6 grid grid-cols-1 lg:grid-cols-[1fr_390px] gap-10 xl:gap-16 items-center w-full">
 
         {/* Left: headline */}
         <div>
           {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-4"
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-7"
             style={{ background: "rgba(var(--brand-orange-rgb),0.15)", borderColor: "rgba(var(--brand-orange-rgb),0.3)" }}>
             <Zap className="w-3.5 h-3.5" style={{ color: "var(--primary)" }} />
             <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "var(--primary)" }}>
-              {t("Women-led agritech", "L’agritech au féminin")}
+              {"From buyer demand to better harvests"}
             </span>
           </div>
 
-          <h1 className="text-4xl lg:text-5xl xl:text-[3.25rem] font-bold leading-[1.12] tracking-tight mb-4 max-w-2xl"
+          <h1 className="text-4xl lg:text-5xl xl:text-[3.25rem] font-bold leading-[1.12] tracking-tight mb-6 max-w-2xl"
             style={{ color: "var(--hero-foreground)" }}>
-            {t("Sell before you produce.", "Vendez avant de produire.")}
+            {"Sell before you produce."}
           </h1>
 
-          <p className="text-base lg:text-lg leading-relaxed mb-5 max-w-xl"
+          <p className="text-base lg:text-lg leading-relaxed mb-10 max-w-xl"
             style={{ color: "var(--hero-muted)" }}>
-            {t("Connecting women farmers, buyers and agronomists, even beyond mobile internet.", "Relier agricultrices, acheteurs et agronomes, même sans Internet mobile.")}
+            {"Connect farmers with buyers before planting. Si-Tcha AI brings market coordination, agronomic intelligence, and SMS advice together so cooperatives can plan production around demand and reduce the uncertainty of selling after harvest."}
           </p>
 
           <div className="flex flex-wrap gap-4">
             <a href="#investors" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all active:scale-95 hover:brightness-110"
               style={{ background: "var(--primary)", color: "var(--primary-foreground)", boxShadow: "0 8px 24px rgba(var(--brand-orange-rgb),0.35)" }}>
-              {t("Back the pilot", "Soutenir le pilote")}
+              {"Explore the investment opportunity"}
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
               style={{ border: "1px solid var(--muted-foreground)", color: "var(--hero-foreground)" }}>
-              {t("Join us", "Nous rejoindre")}
+              {"Join the pilot ecosystem"}
             </a>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mt-5 pt-4"
+          <div className="grid grid-cols-3 gap-8 mt-8 pt-6"
             style={{ borderTop: "1px solid rgba(var(--text-rgb),0.1)" }}>
-            {[{ val: "1 GIC", label: t("Test group", "Groupe test") }, { val: "10", label: t("Women farmers", "Agricultrices") }, { val: "3 GICs", label: t("Launch goal", "Objectif") }].map((s) => (
+            {[{ val: "1", label: "GIC in the test program" }, { val: "Highlands", label: "Cameroon pilot region" }, { val: "SMS", label: "Reaching basic phones" }].map((s) => (
               <div key={s.label}>
                 <div className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>{s.val}</div>
                 <div className="text-xs mt-0.5 font-medium" style={{ color: "var(--muted-foreground)" }}>{s.label}</div>
