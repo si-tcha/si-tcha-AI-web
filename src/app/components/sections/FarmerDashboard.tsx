@@ -8,7 +8,7 @@ import { useWeglot } from "../../hooks/useWeglot";
 const frenchLabels: Record<string, string> = {
   "Si-Tcha AI • Farmer dashboard": "Si-Tcha AI • Tableau de bord",
   "Interactive demo": "Démo interactive", "Hello, Fonkou": "Bonjour, Fonkou",
-  "GIC Avenir Mbouda • Producer": "GIC Avenir Mbouda • Producteur", "Local sync": "Données locales", "Offline ready": "Prêt hors ligne",
+  "GIC Avenir Mbouda • Producer": "GIC Avenir Mbouda • Producteur", "Local sync": "Synchronisation locale", "Offline ready": "Prêt hors ligne",
   "Overview": "Accueil", "My plot": "Ma parcelle", "Alerts": "Alertes", "Finances": "Finances", "Refresh demo": "Actualiser la démo",
   "My active plot • B3": "Ma parcelle active • B3", "1.8 ha • Plantain / mixed coffee": "1,8 ha • Plantain / caféiers mixtes",
   "Current phase": "Phase actuelle", "Growth": "Croissance", "Crop health • NDVI": "Santé végétale • NDVI", "Good": "Bon état",
@@ -86,7 +86,7 @@ export default function FarmerDashboard() {
     <div className="dashboard-stack"><aside className="farmer-dashboard w-full max-w-[390px] mx-auto rounded-[28px] border border-border overflow-hidden shadow-2xl" aria-label="Interactive farmer dashboard demonstration">
       <div className="dashboard-header p-4 pb-3">
         <div className="flex items-center justify-between gap-3 mb-3">
-          <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-white/80">Si-Tcha AI</span>
+          <span className="text-[10px] font-bold tracking-[0.16em] uppercase text-white/80">{t("Si-Tcha AI • Farmer dashboard")}</span>
           <span className="rounded-full bg-white/15 px-2.5 py-1 text-[10px] font-semibold text-white">{t("Interactive demo")}</span>
         </div>
         <div className="flex items-center gap-3 mb-3">
@@ -94,7 +94,7 @@ export default function FarmerDashboard() {
           <div><p className="font-bold text-white text-base">{t("Hello, Fonkou")}</p><p className="text-[10px] uppercase tracking-wider text-[#F3A261]">{t("GIC Avenir Mbouda • Producer")}</p></div>
         </div>
         <div className="flex items-center justify-between gap-2 bg-white/10 rounded-xl px-3 py-2.5 text-xs text-white/90">
-          <span className="flex items-center gap-2"><RefreshCw className={`w-3.5 h-3.5 ${playing && !reducedMotion ? "dashboard-sync" : ""}`} />{t("Local sync")}</span>
+          <span className="flex items-center gap-2"><RefreshCw className={`w-3.5 h-3.5 ${playing && !reducedMotion ? "dashboard-sync" : ""}`} />{t("Local sync")} • <time dateTime={today.key} translate="no">{today.key}</time></span>
           <span className="text-[10px] text-white/70">{t("Offline ready")}</span>
         </div>
         <div className="grid grid-cols-5 gap-1 mt-3 text-center">

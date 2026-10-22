@@ -67,7 +67,7 @@ export default function HeroSection() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-8 mt-8 pt-6"
             style={{ borderTop: "1px solid rgba(var(--text-rgb),0.1)" }}>
-            {[{ val: "1", label: "GIC in the test program" }, { val: "Highlands", label: "Cameroon pilot region" }, { val: "SMS", label: "Reaching basic phones" }].map((s) => (
+            {[{ val: "5", label: "GICs in the pilot" }, { val: "Highlands", label: "Cameroon pilot region" }, { val: "SMS", label: "Reaching basic phones" }].map((s) => (
               <div key={s.label}>
                 <div className="text-2xl font-bold" style={{ color: "var(--foreground)" }}>{s.val}</div>
                 <div className="text-xs mt-0.5 font-medium" style={{ color: "var(--muted-foreground)" }}>{s.label}</div>

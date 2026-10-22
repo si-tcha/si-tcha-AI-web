@@ -1,4 +1,3 @@
-import { useWeglot } from "../../hooks/useWeglot";
 import type { ElementType } from "react";
 import { Wifi, MessageSquare, FileCheck, Shield, Leaf, Users, TrendingUp } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
@@ -13,30 +12,28 @@ const iconMap: Record<string, ElementType> = {
 };
 
 export default function AboutSection() {
-  const { lang } = useWeglot();
-  const t = (en: string, fr: string) => lang === "fr" ? fr : en;
   return (
-    <section translate="no" id="about" className="compact-section py-24 px-6"
+    <section id="about" className="py-24 px-6"
       style={{ background: "var(--section-background)" }}>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left: copy */}
         <div>
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">
-            {t("Our approach", "Notre approche")}
+            {"How Si-Tcha works"}
           </span>
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-6">
-            {t("A market first. Better decisions next.", "Un débouché d’abord. Des choix éclairés ensuite.")}
+            {"Start with a market. Support every growing decision."}
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-5 text-base">
-            {t("We are building an offline-first platform that brings buyers, agronomists and farming groups together.", "Nous développons une plateforme accessible hors ligne, reliant acheteurs, agronomes et GIC.")}
+          <p className="text-muted-foreground leading-relaxed mb-10 text-base">
+            {"Growing without a buyer exposes farmers to uncertain prices and unsold harvests. Si-Tcha brings farmers, buyers, and agronomists into one coordinated process: align demand before planting, support production with data, and help informal groups build the legal structure to access formal markets."}
           </p>
 
-          <div className="grid grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             {[
-  { icon: "Wifi", label: t("Buyer connections", "Débouchés"), desc: t("Discuss demand before planting.", "Identifier la demande avant de semer.") },
-  { icon: "MessageSquare", label: t("Advice by SMS", "Conseils par SMS"), desc: t("Designed for basic phones.", "Pour les téléphones simples.") },
-  { icon: "FileCheck", label: t("Satellite insights", "Suivi satellite"), desc: t("Track crops, weather and soil conditions.", "Suivre cultures, météo et sols.") },
-  { icon: "Shield", label: t("Stronger GICs", "GIC renforcés"), desc: t("Support organization and access to funding programs.", "Faciliter l’organisation et l’accès aux financements.") },
+  { icon: "Wifi", label: "Plan around buyer demand", desc: "Connect crop requirements with cooperative production plans and work toward purchase commitments before planting." },
+  { icon: "MessageSquare", label: "Reach farmers by SMS", desc: "Deliver essential weather and agronomic advice to basic phones, without requiring mobile internet to receive it." },
+  { icon: "FileCheck", label: "Turn data into field decisions", desc: "Combine satellite imagery and predictive models to inform crop monitoring, weather alerts, and market decisions." },
+  { icon: "Shield", label: "Build stronger cooperatives", desc: "Help informal farming groups register as GICs and become better positioned to apply for subsidies, credit, and supply contracts." },
 ].map((pillar) => {
               const Icon = iconMap[pillar.icon];
               return (
@@ -58,7 +55,7 @@ export default function AboutSection() {
 
         {/* Right: ecosystem diagram */}
         <div className="flex items-center justify-center">
-          <div className="relative w-full max-w-[300px] aspect-square rounded-3xl overflow-hidden border border-border"
+          <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden border border-border"
             style={{ background: "linear-gradient(135deg, rgba(var(--brand-green-rgb),0.05), rgba(var(--brand-orange-rgb),0.08))" }}>
             <img
               src={AboutImage}
@@ -105,9 +102,9 @@ export default function AboutSection() {
 
                 {/* Satellite nodes */}
                 {[
-                  { label: [t("Farmers", "Agriculteurs"), t("Buyers", "Acheteurs"), t("Agronomists", "Agronomes")][0], icon: Users, angle: -90, bg: "#103D22" },
-                  { label: [t("Farmers", "Agriculteurs"), t("Buyers", "Acheteurs"), t("Agronomists", "Agronomes")][1], icon: TrendingUp, angle: 30, bg: "#BE490B" },
-                  { label: [t("Farmers", "Agriculteurs"), t("Buyers", "Acheteurs"), t("Agronomists", "Agronomes")][2], icon: Leaf, angle: 150, bg: "#1C5B3B" },
+                  { label: ["Farmers","Buyers","Agronomists"][0], icon: Users, angle: -90, bg: "#103D22" },
+                  { label: ["Farmers","Buyers","Agronomists"][1], icon: TrendingUp, angle: 30, bg: "#BE490B" },
+                  { label: ["Farmers","Buyers","Agronomists"][2], icon: Leaf, angle: 150, bg: "#1C5B3B" },
                 ].map(({ label, icon: NodeIcon, angle, bg }, i) => {
                   const rad = (angle * Math.PI) / 180;
                   const x = 50 + 43 * Math.cos(rad);

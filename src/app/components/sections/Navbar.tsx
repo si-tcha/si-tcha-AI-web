@@ -16,7 +16,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const labels: Record<string, string> = lang === "fr"
-    ? { Home: "Accueil", About: "À propos", Investors: "Investisseurs", Partners: "Partenaires", Contact: "Contact" } : {};
+    ? { Home: "Accueil", Pilot: "Pilote", About: "À propos", Investors: "Investisseurs", Partners: "Partenaires", Contact: "Contact" } : {};
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -49,7 +49,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          {["Home", "About", "Investors", "Partners", "Contact"].map((item) => (
+          {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((item) => (
             <a key={item} style={{ color: "var(--foreground)" }} href={navLinks[item] || "#"}
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 scrolled ? "text-foreground" : "text-foreground"
@@ -122,7 +122,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="md:hidden bg-card border-t border-border px-6 py-5 flex flex-col gap-4 shadow-lg">
-          {["Home", "About", "Investors", "Partners", "Contact"].map((item) => (
+          {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((item) => (
             <a key={item} href={navLinks[item] || "#"} onClick={() => setMenuOpen(false)}
               className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               {labels[item] || item}

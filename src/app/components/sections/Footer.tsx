@@ -14,7 +14,7 @@ const pageLabels: Record<string, string> = {
 export default function Footer() {
   const { lang } = useWeglot();
   return (
-    <footer className="compact-footer py-10 px-6" style={{ background: "var(--footer-background)", color: "#FFFFFF" }}>
+    <footer className="py-16 px-6" style={{ background: "var(--footer-background)", color: "#FFFFFF" }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
@@ -30,7 +30,7 @@ export default function Footer() {
               <span data-brand translate="no" className="font-bold text-lg" style={{ color: "#FFFFFF" }}>Si-Tcha AI</span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.72)" }}>
-              {"Sell before you produce. Built with rural women in Cameroon."}
+              {"Sell before you produce. Connecting buyer demand, farmer organization, and agronomic intelligence in Cameroon."}
             </p>
             <div className="flex items-center gap-2 mt-5">
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#F3A261" }} />
@@ -47,7 +47,7 @@ export default function Footer() {
               {"Sitemap"}
             </div>
             <div className="flex flex-col gap-2.5">
-              {["Home", "About", "Investors", "Partners", "Contact"].map((link) => (
+              {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((link) => (
                 <a key={link} href={navLinks[link] || "#"}
                   className="text-sm transition-colors"
                   style={{ color: "rgba(255,255,255,0.72)" }}
@@ -78,7 +78,7 @@ export default function Footer() {
         <div translate="no" lang={lang} className="react-interactive mb-10 pt-8 border-t border-white/10">
           <p className="font-semibold mb-4">{lang === "fr" ? "Découvrir Si-Tcha AI" : "Explore Si-Tcha AI"}</p>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-            {seoPages.filter(page => page.lang === lang && !["/en/pilot/", "/fr/pilote/"].includes(page.path)).map(page => (
+            {seoPages.filter(page => page.lang === lang).map(page => (
               <li key={page.path}>
                 <a className="hover:underline underline-offset-4" href={page.path} hrefLang={lang}>
                   {pageLabels[page.path.split("/")[2]]}
@@ -92,7 +92,7 @@ export default function Footer() {
           style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
           <span className="text-xs" style={{ color: "rgba(255,255,255,0.72)" }}>{"© 2026 Si-Tcha AI SARL. All rights reserved."}</span>
           <span className="text-xs" style={{ fontFamily: '"DM Mono", monospace', color: "rgba(255,255,255,0.72)" }}>
-            {"Our roots nourish the future."}
+            {"Rooted in Cameroon. Built for rural opportunity."}
           </span>
         </div>
       </div>
