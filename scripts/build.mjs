@@ -1,5 +1,5 @@
 import { build } from 'vite';
-import { mkdir, readFile, writeFile, copyFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, copyFile, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 
@@ -21,12 +21,12 @@ if (!logo || !hero) throw new Error('Missing logo or hero in asset manifest');
 await copyFile(path.join(dist, logo), path.join(dist, 'social-logo.png'));
 
 const organization = {
-  '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Si-Tcha AI', legalName: 'Si-Tcha AI SARL', url: `${origin}/`,
+  '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Si-Tcha AI', url: `${origin}/`,
   logo: `${origin}/${logo}`, email: 'contact@si-tcha.com', telephone: '+237670463484',
   address: { '@type': 'PostalAddress', addressLocality: 'Yaoundé', addressCountry: 'CM' },
   description: 'Agricultural coordination connecting buyers, farming groups and agronomists in Cameroon. Sell before you produce.',
 };
-const home = { path: '/', lang: 'en', title: 'Si-Tcha AI — Sell before you produce in Cameroon', description: 'Si-Tcha AI connects buyers, farming groups and agronomists in Cameroon. Sell before you produce with market coordination and agricultural advice by SMS.' };
+const home = { path: '/', lang: 'en', title: 'Si-Tcha AI', description: 'Si-Tcha AI connects buyers, farming groups and agronomists in Cameroon. Sell before you produce with market coordination and agricultural advice by SMS.' };
 for (const page of [home, ...seoPages]) {
   const canonical = origin + page.path;
   const graph = [organization, { '@type': 'WebSite', '@id': `${origin}/#website`, url: `${origin}/`, name: 'Si-Tcha AI', publisher: { '@id': organization['@id'] }, inLanguage: ['en', 'fr'] }, {
@@ -44,21 +44,21 @@ for (const page of [home, ...seoPages]) {
   ].join('\n') : '';
   const head = `${alternates}
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Si-Tcha AI" />
-<meta property="og:title" content="${escape(page.title)}" />
+<meta property="og:site_name" content="Si-Tcha AI" translate="no" data-brand />
+<meta property="og:title" content="${escape(page.title)}" translate="no" data-brand />
 <meta property="og:description" content="${escape(page.description)}" />
 <meta property="og:url" content="${canonical}" />
 <meta property="og:locale" content="${page.lang === 'fr' ? 'fr_CM' : 'en_CM'}" />
 <meta property="og:image" content="${origin}/social-logo.png" />
 <meta property="og:image:alt" content="Si-Tcha AI logo" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="${escape(page.title)}" />
+<meta name="twitter:title" content="${escape(page.title)}" translate="no" data-brand />
 <meta name="twitter:description" content="${escape(page.description)}" />
 <meta name="twitter:image" content="${origin}/social-logo.png" />
 ${page.path === '/' ? `<link rel="preload" as="image" href="/${hero}" fetchpriority="high" />` : ''}
 <script type="application/ld+json">${json({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
   const html = template.replace('<html lang="en">', `<html lang="${page.lang}">`)
-    .replace(/<title>.*?<\/title>/s, `<title>${escape(page.title)}</title>`)
+    .replace(/<title[^>]*>.*?<\/title>/s, `<title translate="no">${escape(page.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${escape(page.description)}" />`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/>/, `<link rel="canonical" href="${canonical}" />`)
     .replace('<!--seo-head-->', head).replace('<!--app-html-->', render(page.path));
@@ -70,4 +70,7 @@ ${page.path === '/' ? `<link rel="preload" as="image" href="/${hero}" fetchprior
 await writeFile(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${[home, ...seoPages].map(page => `  <url><loc>${origin + page.path}</loc></url>`).join('\n')}\n</urlset>\n`);
 await writeFile(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\n# Search crawlers, including Googlebot, Bingbot and OAI-SearchBot, are allowed.\nSitemap: ${origin}/sitemap.xml\n`);
 await writeFile(path.join(dist, '404.html'), `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Page introuvable — Si-Tcha AI</title></head><body style="font-family:system-ui;max-width:48rem;margin:15vh auto;padding:2rem;color:#103d22"><h1>Page introuvable / Page not found</h1><p>Cette adresse ne correspond à aucune page du site.</p><a href="/">Revenir à l'accueil / Back to home</a></body></html>`);
-console.log(`SEO: ${seoPages.length + 1} static pages, sitemap, robots and 404 generated.`);
+// Build-only files must not be part of the upload to LWS.
+await rm(path.join(dist, '.vite'), { recursive: true, force: true });
+await rm(path.join(root, '.seo-build'), { recursive: true, force: true });
+console.log(`SEO: ${seoPages.length + 1} static pages, sitemap, robots and 404 generated. Build-only files removed.`);

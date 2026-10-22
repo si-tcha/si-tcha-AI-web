@@ -15,6 +15,8 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const labels: Record<string, string> = lang === "fr"
+    ? { Home: "Accueil", Pilot: "Pilote", About: "À propos", Investors: "Investisseurs", Partners: "Partenaires", Contact: "Contact" } : {};
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -24,7 +26,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav translate="no" className={`react-interactive fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled
         ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-sm"
         : "bg-transparent"
@@ -38,7 +40,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
             alt="Si-Tcha AI logo — windswept tree at sunset"
             className="w-9 h-9 rounded-full object-cover"
           />
-          <span className={`font-bold text-lg tracking-tight transition-colors ${
+          <span data-brand translate="no" className={`font-bold text-lg tracking-tight transition-colors ${
             scrolled ? "text-foreground" : "text-foreground"
           }`}>
             Si-Tcha AI
@@ -52,7 +54,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 scrolled ? "text-foreground" : "text-foreground"
               }`}>
-              {item}
+              {labels[item] || item}
             </a>
           ))}
         </div>
@@ -123,7 +125,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
           {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((item) => (
             <a key={item} href={navLinks[item] || "#"} onClick={() => setMenuOpen(false)}
               className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              {item}
+              {labels[item] || item}
             </a>
           ))}
           <div className="flex items-center justify-between pt-3 border-t border-border">

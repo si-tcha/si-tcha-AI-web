@@ -45,9 +45,11 @@ function loadWeglot(): Promise<WeglotClient> {
         client.initialize({
           api_key: apiKey,
           hide_switcher: true,
+          wait_transition: false,
           // Weglot adds translate="no" to <html> itself. Matching that
           // attribute globally would exclude the entire page from translation.
-          excluded_blocks: [{ value: 'nav [translate="no"]' }],
+          // React owns these dynamic nodes; translate them through component state.
+          excluded_blocks: [{ value: '.react-interactive' }, { value: '#root [translate="no"]' }, { value: '[data-brand]' }, { value: 'title' }],
           // Observe React content added after load, including menus and form messages.
           dynamics: [{ value: "#root" }],
         });

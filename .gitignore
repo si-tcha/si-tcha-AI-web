@@ -6,3 +6,6 @@ dist/
 .env.local
 .env.*.local
 *.log
+
+# Local FTP credentials
+/output/deployment/Si-Tcha-AI-LWS-FileZilla.xml

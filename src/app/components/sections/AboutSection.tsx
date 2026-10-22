@@ -94,6 +94,7 @@ export default function AboutSection() {
                     <ImageWithFallback
                       src={logoImage}
                       alt="Si-Tcha AI"
+                      translate="no"
                       className="w-14 h-14 object-cover rounded-full" loading="lazy"
                     />
                   </div>

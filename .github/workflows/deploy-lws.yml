@@ -1,0 +1,61 @@
+name: Site Si-Tcha AI — LWS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Publier sur LWS après compilation et contrôles
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lws-production
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          VITE_WEGLOT_API_KEY: ${{ secrets.VITE_WEGLOT_API_KEY }}
+      - run: npm run check:seo
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-lws
+          include-hidden-files: true
+          path: |
+            dist/
+            !dist/.vite/**
+
+  deploy:
+    needs: build
+    if: vars.LWS_DEPLOY_ENABLED == 'true' || (github.event_name == 'workflow_dispatch' && inputs.deploy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-lws
+          path: dist
+      - name: Publier uniquement dans le dossier Si-Tcha AI
+        run: python scripts/deploy-lws.py
+        env:
+          LWS_FTP_HOST: ${{ secrets.LWS_FTP_HOST }}
+          LWS_FTP_USER: ${{ secrets.LWS_FTP_USER }}
+          LWS_FTP_PASSWORD: ${{ secrets.LWS_FTP_PASSWORD }}
+          LWS_FTP_DIR: ${{ secrets.LWS_FTP_DIR }}

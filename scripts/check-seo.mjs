@@ -23,7 +23,7 @@ for (const [pathname, html] of pages) {
   assert(html.includes(`<link rel="canonical" href="${origin + pathname}"`), `${pathname}: wrong canonical`);
   assert(html.includes('<main'), `${pathname}: missing main content`);
   assert(!html.includes('/src/assets/'), `${pathname}: unbuilt asset URL`);
-  const title = html.match(/<title>(.*?)<\/title>/s)?.[1];
+  const title = html.match(/<title[^>]*>(.*?)<\/title>/s)?.[1];
   const description = html.match(/<meta name="description" content="(.*?)"/)?.[1];
   assert(title && !titles.has(title), `${pathname}: title missing or duplicated`);
   assert(description && !descriptions.has(description), `${pathname}: description missing or duplicated`);
@@ -31,6 +31,12 @@ for (const [pathname, html] of pages) {
   const structured = html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)?.[1];
   assert(structured, `${pathname}: missing structured data`);
   assert(JSON.parse(structured)['@graph'].some(item => item['@type'] === 'Organization'));
+  const graph = JSON.parse(structured)['@graph'];
+  for (const type of ['Organization', 'WebSite']) assert.equal(graph.find(item => item['@type'] === type)?.name, 'Si-Tcha AI', `${pathname}: wrong company name`);
+  if (pathname === '/') {
+    assert.equal(title, 'Si-Tcha AI', 'Homepage title must contain only the company name');
+    assert.equal((html.match(/class="react-interactive/g) || []).length, 3, 'Menu, dashboard and form must be isolated from DOM translation');
+  }
   for (const match of html.matchAll(/(?:href|src)="(\/[^"#]*)(#[^"]*)?"/g)) {
     const target = decodeURIComponent(match[1]);
     if (target.startsWith('//')) continue;

@@ -1,9 +1,21 @@
 import { useRef, useState, type FormEvent } from "react";
 import { submitContact } from "../../lib/contact";
+import { useWeglot } from "../../hooks/useWeglot";
 import { Mail, Phone, ArrowRight, Send, CheckCircle, Loader2, Smartphone } from "lucide-react";
 
 
 export default function ContactSection() {
+  const { lang } = useWeglot();
+  const french: Record<string, string> = {
+    "Full Name": "Nom complet", "Email Address": "Adresse e-mail", "Organization": "Organisation", "Subject": "Objet", "Message": "Message",
+    "Message Sent!": "Message envoyé !", "Send another message": "Envoyer un autre message", "Send Message": "Envoyer le message", "Sending...": "Envoi en cours…",
+    "Thank you! Your message has been submitted. The Si-Tcha team will get back to you shortly.": "Merci ! Votre message a été transmis. L’équipe Si-Tcha AI vous répondra prochainement.",
+    "Your details will be sent to the Si-Tcha team via Formspree so we can respond to your enquiry.": "Vos informations seront transmises à l’équipe Si-Tcha AI via Formspree pour répondre à votre demande.",
+    "Association of Watermelon Farmers of the West": "Association des producteurs de pastèques de l’Ouest",
+    "Pilot participation, crop sourcing, or investment": "Participation au pilote, approvisionnement ou investissement",
+    "Tell us your role, location, and what you would like to build with Si-Tcha.": "Présentez votre activité, votre localisation et votre projet avec Si-Tcha AI.",
+  };
+  const t = (text: string) => lang === "fr" ? french[text] || text : text;
   const [form, setForm] = useState({
     name: "", email: "", org: "", subject: "", message: "",
   });
@@ -109,13 +121,13 @@ export default function ContactSection() {
           </div>
 
           {/* Right: form */}
-          <div className="bg-card border border-border rounded-2xl p-7 min-h-[580px] flex flex-col">
+          <div translate="no" className="react-interactive bg-card border border-border rounded-2xl p-7 min-h-[580px] flex flex-col">
             {formStatus === 'success' ? (
               <div className="flex flex-col items-center justify-center text-center h-full gap-4">
                 <CheckCircle className="w-16 h-16 text-emerald-500" />
-                <h3 className="text-2xl font-bold text-foreground">Message Sent!</h3>
+                <h3 className="text-2xl font-bold text-foreground">{t("Message Sent!")}</h3>
                 <p className="text-muted-foreground max-w-xs">
-                  {"Thank you! Your message has been submitted. The Si-Tcha team will get back to you shortly."}
+                  {t("Thank you! Your message has been submitted. The Si-Tcha team will get back to you shortly.")}
                 </p>
                 <button
                   onClick={() => {
@@ -125,7 +137,7 @@ export default function ContactSection() {
                   className="mt-4 inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-sm rounded-xl transition-all active:scale-[0.98] hover:brightness-110"
                   style={{ background: "var(--primary)", color: "var(--primary-foreground)" }}
                 >
-                  {"Send another message"}
+                  {t("Send another message")}
                 </button>
               </div>
             ) : (
@@ -141,9 +153,9 @@ export default function ContactSection() {
                   ].map(({ key, label, type, ph }) => (
                     <div key={key} className="flex flex-col gap-1.5">
                       <label htmlFor={key} className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                        {label}
+                        {t(label)}
                       </label>
-                      <input id={key} name={key} type={type} placeholder={ph} required
+                      <input id={key} name={key} type={type} placeholder={t(ph)} required
                         value={form[key as keyof typeof form]}
                         onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                         className="px-4 py-3 rounded-xl text-foreground text-sm transition-all focus:outline-none placeholder:text-muted-foreground/75"
@@ -167,9 +179,9 @@ export default function ContactSection() {
                 ].map(({ key, label, ph, req }) => (
                   <div key={key} className="flex flex-col gap-1.5">
                     <label htmlFor={key} className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-                      {label}
+                      {t(label)}
                     </label>
-                    <input id={key} name={key} type="text" placeholder={ph} required={req}
+                    <input id={key} name={key} type="text" placeholder={t(ph)} required={req}
                       value={form[key as keyof typeof form]}
                       onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                       className="px-4 py-3 rounded-xl text-foreground text-sm transition-all focus:outline-none placeholder:text-muted-foreground/75"
@@ -191,7 +203,7 @@ export default function ContactSection() {
                     {"Message"}
                   </label>
                   <textarea id="message" name="message" rows={5} required
-                    placeholder={"Tell us your role, location, and what you would like to build with Si-Tcha."}
+                    placeholder={t("Tell us your role, location, and what you would like to build with Si-Tcha.")}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     className="px-4 py-3 rounded-xl text-foreground text-sm transition-all focus:outline-none resize-none placeholder:text-muted-foreground/75 flex-1"
@@ -209,11 +221,11 @@ export default function ContactSection() {
 
                 {formStatus === 'error' && (
                   <p role="alert" className="text-destructive text-xs text-center">
-                    Unable to send your message. Please try again or email us at <a href="mailto:contact@si-tcha.com" className="underline">contact@si-tcha.com</a>.
+                    {lang === "fr" ? "Échec de l’envoi. Réessayez ou écrivez à " : "Unable to send your message. Please try again or email us at "}<a href="mailto:contact@si-tcha.com" className="underline">contact@si-tcha.com</a>.
                   </p>
                 )}
 
-                <p className="text-xs text-muted-foreground leading-relaxed">Your details will be sent to the Si-Tcha team via Formspree so we can respond to your enquiry.</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{t("Your details will be sent to the Si-Tcha team via Formspree so we can respond to your enquiry.")}</p>
                 <button type="submit"
                   disabled={formStatus === 'submitting'}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 font-semibold text-sm rounded-xl transition-all active:scale-[0.98] hover:brightness-110 disabled:opacity-70 disabled:cursor-not-allowed"
@@ -228,8 +240,8 @@ export default function ContactSection() {
                     <Send className="w-4 h-4" />
                   )}
                   {formStatus === 'submitting'
-                    ? ("Sending...")
-                    : "Send Message"
+                    ? t("Sending...")
+                    : t("Send Message")
                   }
                 </button>
               </form>

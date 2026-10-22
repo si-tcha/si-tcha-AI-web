@@ -14,10 +14,11 @@ export default function Footer() {
               <ImageWithFallback
                 src={logoImage}
                 alt="Si-Tcha AI logo"
+                translate="no"
                 className="w-9 h-9 rounded-full object-cover"
                 loading="lazy"
               />
-              <span className="font-bold text-lg" style={{ color: "#FFFFFF" }}>Si-Tcha AI</span>
+              <span data-brand translate="no" className="font-bold text-lg" style={{ color: "#FFFFFF" }}>Si-Tcha AI</span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.72)" }}>
               {"Sell before you produce. Connecting buyer demand, farmer organization, and agronomic intelligence in Cameroon."}

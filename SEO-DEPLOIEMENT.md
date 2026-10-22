@@ -1,5 +1,37 @@
 # Référencement et publication LWS
 
+## Mettre à jour le site avec FileZilla
+
+1. Exécuter `npm run build`, puis `npm run check:seo`. Le build retire ses fichiers techniques temporaires ; `dist/` contient uniquement les fichiers à publier.
+2. Se connecter avec le profil FileZilla, puis ouvrir **`/si-tcha.com`** à droite. Ce chemin est confirmé par la capture de connexion du compte actuel : sa racine FTP `/` correspond déjà au dossier web principal de l'hébergement. Ne pas utiliser `/htdocs/si-tcha.com` avec ce compte sans vérifier.
+3. Sauvegarder le contenu distant avant de le remplacer. Conserver notamment le `.htaccess` si LWS y a ajouté des directives nécessaires.
+4. À gauche, ouvrir `dist/`. Envoyer d'abord le dossier `assets/` ; attendre la fin et vérifier l'absence de transfert échoué.
+5. Envoyer ensuite `en/`, `fr/` et les fichiers à la racine de `dist/`, y compris `.htaccess`. Autoriser le remplacement pour ce transfert. Ne pas transférer le dossier parent `dist`, les sources, les sauvegardes ou le fichier FileZilla contenant le mot de passe.
+6. Attendre une file vide et zéro transfert échoué. Faire `Ctrl+F5` sur l'accueil, puis tester FR, EN, les onglets du dashboard, le thème, un rechargement en français et les pages thématiques. Le titre de l'accueil doit rester **Si-Tcha AI**.
+7. Après validation, supprimer uniquement les anciens fichiers techniques confirmés inutiles dans **`/si-tcha.com`** : `.vite/` et, pour le correctif du 22 octobre, l'ancien script `assets/index-B_CgdBsM.js` et l'ancienne feuille `assets/index-DIQmprnl.css`. Ne pas supprimer tout `assets/`, `en/`, `fr/` ni toucher aux dossiers du site principal.
+
+Pour préparer une archive alternative après compilation : `powershell -File scripts/package-release.ps1`. Elle est écrite dans `output/deployment/Si-Tcha-AI-LWS-publication.zip`, jamais dans `dist/`.
+
+Le correctif de traduction isole le menu, le tableau de bord et le formulaire de la modification du DOM par Weglot. Leurs textes interactifs sont rendus par React dans la langue courante ; Weglot continue de traduire les sections éditoriales. L'option `wait_transition: false` évite de masquer toute la page pendant la traduction. Le nom de site Organization/WebSite et le titre d'accueil sont **Si-Tcha AI** ; les pages thématiques conservent des titres descriptifs distincts avec ce même nom d'entreprise.
+
+## Publication automatique avec GitHub Actions
+
+Le workflow `.github/workflows/deploy-lws.yml` compile et contrôle le site sur les envois à la branche `main`. Il conserve le résultat dans l'artefact `site-lws`. S'il s'agit d'une autre branche principale, adapter le nom dans le workflow.
+
+Pour publier, ajouter dans GitHub → Settings → Secrets and variables → Actions les secrets de dépôt suivants :
+
+| Secret | Valeur |
+| --- | --- |
+| `LWS_FTP_HOST` | Nom FTP LWS correspondant à un certificat TLS valide. Le nom actuel `ftp.laretine.org` présente une incompatibilité de certificat ; son remplacement par l'IP ne corrige pas ce point. |
+| `LWS_FTP_USER` | Identifiant FTP de l'hébergement. |
+| `LWS_FTP_PASSWORD` | Mot de passe FTP, à saisir directement dans GitHub. |
+| `LWS_FTP_DIR` | Chemin FTP absolu du dossier existant `si-tcha.com`, à confirmer après connexion. Ne pas deviner le chemin ni utiliser `/` ou `/htdocs`. |
+| `VITE_WEGLOT_API_KEY` | Clé publique de l'intégration Weglot, nécessaire au sélecteur de l'accueil. |
+
+Faire une sauvegarde de la version en ligne avant la première publication. Lancer ensuite Actions → Site Si-Tcha AI — LWS → Run workflow, en cochant l'option de publication. Après validation de ce premier déploiement, créer la variable de dépôt `LWS_DEPLOY_ENABLED` avec la valeur `true` pour publier automatiquement les prochains envois sur `main`.
+
+Sans cette variable, les envois compilent et vérifient le site mais ne le publient pas. Le transfert utilise FTPS explicite sur le port 21, avec contrôle de la chaîne de certificat et du nom d'hôte ; aucune désactivation TLS n'est prévue. Le script exige un dossier existant nommé `si-tcha.com`, charge ses fichiers et ne supprime aucun fichier distant. Il ne remplace pas la sauvegarde préalable. Le workflow doit encore être envoyé sur GitHub et configuré ; il n'a pas été exécuté sur le serveur LWS.
+
 ## Ce que produit le projet
 
 `npm ci`, puis `npm run build` génère dans `dist/` un site statique adapté à un hébergement mutualisé. Aucun serveur Node.js n'est nécessaire chez LWS. Le pré-rendu génère l'accueil et six paires de pages françaises et anglaises : agriculteurs/GIC, acheteurs, agronomes, investisseurs, projet et pilote.
