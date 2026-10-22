@@ -299,8 +299,11 @@
 }
 
 
-/* Cowries: understated brand accents on the three white section backgrounds. */
+/* Visible cowries frame opaque reading surfaces instead of sitting under text. */
 .cowrie-surface { position: relative; isolation: isolate; }
+:root:not(.dark) .cowrie-surface {
+  --muted-foreground: #354D3D;
+}
 .cowrie-surface::before {
   content: "";
   position: absolute;
@@ -310,22 +313,30 @@
   background-image: url("../assets/si-tcha-cauris-v1.webp"), url("../assets/si-tcha-cauris-v1.webp");
   background-repeat: no-repeat;
   background-size: 480px 480px, 420px 420px;
-  background-position: left -100px top -90px, right -70px bottom -100px;
-  opacity: .085;
-  -webkit-mask-image: linear-gradient(90deg, #000, transparent 43%, transparent 57%, #000);
-  mask-image: linear-gradient(90deg, #000, transparent 43%, transparent 57%, #000);
+  background-position: left -60px top -60px, right -70px bottom -70px;
+  opacity: .22;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 40%, transparent 60%, #000 88%, #000 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 40%, transparent 60%, #000 88%, #000 100%);
 }
 .cowrie-surface > div { position: relative; z-index: 1; }
+.cowrie-copy {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: rgba(255, 255, 255, .97);
+}
+.cowrie-copy > :last-child { margin-bottom: 0; }
+.dark .cowrie-copy { background: var(--background); }
 .cowrie-surface[aria-labelledby="audience-title"]::before {
-  background-position: left -140px bottom -100px, right -100px top -80px;
+  background-position: left -60px bottom -70px, right -70px top -60px;
   background-size: 420px 420px, 480px 480px;
 }
 .dark .cowrie-surface::before { display: none; }
 @media (max-width: 640px) {
   .cowrie-surface::before, .cowrie-surface[aria-labelledby="audience-title"]::before {
-    background-size: 280px 280px, 250px 250px;
-    background-position: left -100px top -35px, right -85px bottom -45px;
-    opacity: .065;
+    background-size: 320px 320px, 290px 290px;
+    background-position: left -110px top -45px, right -110px bottom -55px;
+    opacity: .20;
   }
 }
 

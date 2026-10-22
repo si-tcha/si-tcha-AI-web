@@ -4,11 +4,13 @@ export default function GicDirectorySection() {
   return (
     <section id="gics" className="cowrie-surface py-24 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
+        <div className="cowrie-copy max-w-3xl mb-10">
         <span className="text-xs font-semibold tracking-widest uppercase text-primary">The pilot in Cameroon</span>
         <h2 className="text-3xl lg:text-4xl font-bold mt-2 mb-5">Rooted in real farming communities.</h2>
         <p className="text-muted-foreground max-w-2xl leading-relaxed mb-10">
           Si-Tcha AI’s functioning pilot serves five selected Common Initiative Groups (GICs) in Cameroon’s Highlands. The focus is practical: coordinate potato and market garden production, connect growers with demand, and make useful advice accessible beyond the internet.
         </p>
+        </div>
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { icon: Users, title: "5 selected GICs", body: "A focused cooperative pilot to test and refine the model with farming groups." },

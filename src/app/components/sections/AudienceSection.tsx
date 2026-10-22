@@ -4,8 +4,10 @@ export default function AudienceSection() {
   return (
     <section className="cowrie-surface py-24 px-6 bg-background" aria-labelledby="audience-title">
       <div className="max-w-7xl mx-auto">
-        <span className="text-xs font-semibold tracking-widest uppercase text-primary">One connected agricultural ecosystem</span>
-        <h2 id="audience-title" className="text-3xl lg:text-4xl font-bold mt-2 mb-10">Better coordination. Shared opportunity.</h2>
+        <div className="cowrie-copy max-w-3xl mb-10">
+          <span className="text-xs font-semibold tracking-widest uppercase text-primary">One connected agricultural ecosystem</span>
+          <h2 id="audience-title" className="text-3xl lg:text-4xl font-bold mt-2">Better coordination. Shared opportunity.</h2>
+        </div>
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { icon: Users, role: "For farmers & GICs", title: "Grow with a clearer route to market.", body: "Bring your group’s production plans closer to real buyer needs. Receive practical advice by SMS and get support to formalize your cooperative—so you can approach markets and funding programs on stronger terms.", cta: "Connect your farming group" },

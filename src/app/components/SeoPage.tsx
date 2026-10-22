@@ -13,7 +13,7 @@ export default function SeoPage({ page }: { page: Page }) {
       </header>
       <main id="main-content" className="cowrie-surface max-w-5xl mx-auto px-6 py-16">
         <nav aria-label={french ? "Fil d'Ariane" : "Breadcrumb"} className="text-sm text-muted-foreground mb-8"><a href="/">{french ? "Accueil" : "Home"}</a><span aria-hidden="true"> / </span><span aria-current="page">{page.title.split(" — ")[0]}</span></nav>
-        <article className="relative z-10 max-w-3xl">
+        <article className="cowrie-copy relative z-10 max-w-3xl">
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">Si-Tcha AI · {french ? "Cameroun" : "Cameroon"}</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">{page.heading}</h1>
           <p className="text-lg text-muted-foreground leading-relaxed mb-12">{page.intro}</p>

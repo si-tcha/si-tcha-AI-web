@@ -35,7 +35,7 @@ export default function PartnersSection() {
   return (
     <section id="partners" className="cowrie-surface py-24 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="cowrie-copy text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Our partner ecosystem</span>
           <h2 className="text-3xl lg:text-4xl font-bold mt-2">The partnerships behind every growing season.</h2>
           <p className="text-muted-foreground mt-4 text-sm max-w-2xl mx-auto leading-relaxed">From mentorship and farmer communication to payments and access to funding programs, our partners help connect production with markets and stronger cooperative finances.</p>
