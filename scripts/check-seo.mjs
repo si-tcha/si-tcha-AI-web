@@ -35,7 +35,7 @@ for (const [pathname, html] of pages) {
   for (const type of ['Organization', 'WebSite']) assert.equal(graph.find(item => item['@type'] === type)?.name, 'Si-Tcha AI', `${pathname}: wrong company name`);
   if (pathname === '/') {
     assert.equal(title, 'Si-Tcha AI', 'Homepage title must contain only the company name');
-    assert.equal((html.match(/class="react-interactive/g) || []).length, 3, 'Menu, dashboard and form must be isolated from DOM translation');
+    assert.equal((html.match(/class="react-interactive/g) || []).length, 4, 'Menu, dashboard, form and localized footer links must be isolated from DOM translation');
   }
   for (const match of html.matchAll(/(?:href|src)="(\/[^"#]*)(#[^"]*)?"/g)) {
     const target = decodeURIComponent(match[1]);

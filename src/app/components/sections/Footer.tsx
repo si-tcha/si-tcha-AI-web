@@ -2,8 +2,17 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 import logoImage from "@/assets/logo.png";
 import { navLinks } from "../../data/navigation";
 import { seoPages } from "../../data/seoPages";
+import { useWeglot } from "../../hooks/useWeglot";
+
+const pageLabels: Record<string, string> = {
+  "farmers-groups": "Farmers & GICs", "agriculteurs-gic": "Agriculteurs et GIC",
+  buyers: "Buyers", acheteurs: "Acheteurs", agronomists: "Agronomists", agronomes: "Agronomes",
+  investors: "Investors", investisseurs: "Investisseurs", project: "Our project", projet: "Notre projet",
+  pilot: "The pilot", pilote: "Le pilote",
+};
 
 export default function Footer() {
+  const { lang } = useWeglot();
   return (
     <footer className="py-16 px-6" style={{ background: "var(--footer-background)", color: "#FFFFFF" }}>
       <div className="max-w-7xl mx-auto">
@@ -66,9 +75,17 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mb-10 pt-8 border-t border-white/10">
-          <p className="font-semibold mb-4">Explore Si-Tcha AI / Découvrir le projet</p>
-          <div className="grid sm:grid-cols-2 gap-6">{(["en", "fr"] as const).map(lang => <div key={lang} lang={lang} translate="no"><p className="text-xs uppercase tracking-widest mb-3">{lang === "fr" ? "Français" : "English"}</p><ul className="space-y-2 text-sm">{seoPages.filter(page => page.lang === lang).map(page => <li key={page.path}><a className="hover:underline" href={page.path} hrefLang={lang}>{page.title.split(" — ")[0]}</a></li>)}</ul></div>)}</div>
+        <div translate="no" lang={lang} className="react-interactive mb-10 pt-8 border-t border-white/10">
+          <p className="font-semibold mb-4">{lang === "fr" ? "Découvrir Si-Tcha AI" : "Explore Si-Tcha AI"}</p>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+            {seoPages.filter(page => page.lang === lang).map(page => (
+              <li key={page.path}>
+                <a className="hover:underline underline-offset-4" href={page.path} hrefLang={lang}>
+                  {pageLabels[page.path.split("/")[2]]}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
