@@ -24,9 +24,9 @@ const organization = {
   '@type': 'Organization', '@id': `${origin}/#organization`, name: 'Si-Tcha AI', url: `${origin}/`,
   logo: `${origin}/${logo}`, email: 'contact@si-tcha.com', telephone: '+237670463484',
   address: { '@type': 'PostalAddress', addressLocality: 'Yaoundé', addressCountry: 'CM' },
-  description: 'Agricultural coordination connecting buyers, farming groups and agronomists in Cameroon. Sell before you produce.',
+  description: 'Women-led agritech in Cameroon. An offline-first platform connecting farmers, buyers and agronomic advice, currently in development.',
 };
-const home = { path: '/', lang: 'en', title: 'Si-Tcha AI', description: 'Si-Tcha AI connects buyers, farming groups and agronomists in Cameroon. Sell before you produce with market coordination and agricultural advice by SMS.' };
+const home = { path: '/', lang: 'en', title: 'Si-Tcha AI', description: 'Si-Tcha AI: sell before you produce. A Cameroon agritech pilot with 10 women farmers, developing buyer connections, offline tools and SMS advice.' };
 for (const page of [home, ...seoPages]) {
   const canonical = origin + page.path;
   const graph = [organization, { '@type': 'WebSite', '@id': `${origin}/#website`, url: `${origin}/`, name: 'Si-Tcha AI', publisher: { '@id': organization['@id'] }, inLanguage: ['en', 'fr'] }, {

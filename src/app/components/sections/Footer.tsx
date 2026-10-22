@@ -14,7 +14,7 @@ const pageLabels: Record<string, string> = {
 export default function Footer() {
   const { lang } = useWeglot();
   return (
-    <footer className="py-16 px-6" style={{ background: "var(--footer-background)", color: "#FFFFFF" }}>
+    <footer className="compact-footer py-10 px-6" style={{ background: "var(--footer-background)", color: "#FFFFFF" }}>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
@@ -30,7 +30,7 @@ export default function Footer() {
               <span data-brand translate="no" className="font-bold text-lg" style={{ color: "#FFFFFF" }}>Si-Tcha AI</span>
             </div>
             <p className="text-sm leading-relaxed max-w-xs" style={{ color: "rgba(255,255,255,0.72)" }}>
-              {"Sell before you produce. Connecting buyer demand, farmer organization, and agronomic intelligence in Cameroon."}
+              {"Sell before you produce. Built with rural women in Cameroon."}
             </p>
             <div className="flex items-center gap-2 mt-5">
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: "#F3A261" }} />
@@ -92,7 +92,7 @@ export default function Footer() {
           style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
           <span className="text-xs" style={{ color: "rgba(255,255,255,0.72)" }}>{"© 2026 Si-Tcha AI SARL. All rights reserved."}</span>
           <span className="text-xs" style={{ fontFamily: '"DM Mono", monospace', color: "rgba(255,255,255,0.72)" }}>
-            {"Rooted in Cameroon. Built for rural opportunity."}
+            {"Our roots nourish the future."}
           </span>
         </div>
       </div>
