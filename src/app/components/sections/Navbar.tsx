@@ -12,6 +12,7 @@ interface NavbarProps {
 
 export default function Navbar({ theme, setTheme }: NavbarProps) {
   const { lang, ready, error, switchLanguage } = useWeglot();
+  const [activeSection, setActiveSection] = useState("Home");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -19,10 +20,32 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
     ? { Home: "Accueil", Pilot: "Pilote", About: "À propos", Investors: "Investisseurs", Partners: "Partenaires", Contact: "Contact" } : {};
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    let frame = 0;
+    const updateSection = () => {
+      setScrolled(window.scrollY > 50);
+      const marker = 64 + Math.min(window.innerHeight * 0.2, 160);
+      let current = "Home";
+      for (const [name, href] of Object.entries(navLinks)) {
+        const element = document.getElementById(href.split("#")[1]);
+        if (element && element.getBoundingClientRect().top <= marker) {
+          // Select the closest section above the reading position, regardless of menu order.
+          const currentElement = document.getElementById(navLinks[current].split("#")[1]);
+          if (!currentElement || element.getBoundingClientRect().top >= currentElement.getBoundingClientRect().top) current = name;
+        }
+      }
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = "Contact";
+      setActiveSection(current);
+      frame = 0;
+    };
+    const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(updateSection); };
+    updateSection();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
@@ -50,8 +73,8 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((item) => (
-            <a key={item} style={{ color: "var(--foreground)" }} href={navLinks[item] || "#"}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+            <a key={item} aria-current={activeSection === item ? "location" : undefined} style={{ color: "var(--foreground)" }} href={navLinks[item] || "#"}
+              className={`section-nav-link text-sm font-medium transition-colors hover:text-primary ${
                 scrolled ? "text-foreground" : "text-foreground"
               }`}>
               {labels[item] || item}
@@ -123,8 +146,8 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
       {menuOpen && (
         <div className="md:hidden bg-card border-t border-border px-6 py-5 flex flex-col gap-4 shadow-lg">
           {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((item) => (
-            <a key={item} href={navLinks[item] || "#"} onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <a key={item} aria-current={activeSection === item ? "location" : undefined} href={navLinks[item] || "#"} onClick={() => setMenuOpen(false)}
+              className="section-nav-link self-start text-sm font-medium text-foreground hover:text-primary transition-colors">
               {labels[item] || item}
             </a>
           ))}

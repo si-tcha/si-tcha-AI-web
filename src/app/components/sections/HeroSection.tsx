@@ -1,8 +1,10 @@
+import { useWeglot } from "../../hooks/useWeglot";
 import FarmerDashboard from "./FarmerDashboard";
 import { ArrowRight, Zap } from "lucide-react";
 import BackgroundArea from "@/assets/area.webp";
 
 export default function HeroSection() {
+  const { lang } = useWeglot();
   return (
     <section className="hero-section relative min-h-screen flex items-center overflow-hidden">
       {/* Background */}
@@ -51,16 +53,16 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a href="#investors" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all active:scale-95 hover:brightness-110"
+            <a href="#investors" className="site-cta inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all active:scale-95 hover:brightness-110"
               style={{ background: "var(--primary)", color: "var(--primary-foreground)", boxShadow: "0 8px 24px rgba(var(--brand-orange-rgb),0.35)" }}>
-              {"Explore the investment opportunity"}
+              <span translate="no">{lang === "fr" ? "Devenir partenaire" : "Become a partner"}</span>
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              className="site-cta inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
               style={{ border: "1px solid var(--muted-foreground)", color: "var(--hero-foreground)" }}>
-              {"Join the pilot ecosystem"}
+              <span translate="no">{lang === "fr" ? "Nous rejoindre" : "Join us"}</span>
             </a>
           </div>
 

@@ -340,3 +340,16 @@
   }
 }
 
+
+/* Shared CTA dimensions remain stable when switching languages. */
+.site-cta { width: 220px; min-height: 52px; max-width: 100%; text-align: center; }
+.section-nav-link { position: relative; padding-block: .5rem; }
+.section-nav-link::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 3px; border-radius: 999px; background: var(--primary); transform: scaleX(0); transform-origin: left; transition: transform 220ms ease; }
+.section-nav-link[aria-current="location"] { font-weight: 700; }
+.section-nav-link[aria-current="location"]::after { transform: scaleX(1); }
+.investor-heading > span { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .18em; transition: text-decoration-color 350ms ease; }
+.investor-heading:hover > span { text-decoration-color: currentColor; }
+@media (prefers-reduced-motion: reduce) { .section-nav-link::after, .investor-heading > span { transition: none; } }
+
+@keyframes investor-text-reveal { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: no-preference) { #investors[data-revealed="true"] .investor-reveal { animation: investor-text-reveal 600ms cubic-bezier(.22,1,.36,1) both; } }
