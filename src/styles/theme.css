@@ -1,0 +1,331 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --font-weight-medium: 600;
+  --font-weight-normal: 400;
+  --radius: 0.75rem;
+  --background: #FFFFFF;
+  --foreground: #103D22;
+  --card: #FFFFFF;
+  --card-foreground: #103D22;
+  --popover: #FFFFFF;
+  --popover-foreground: #103D22;
+  --primary: #BE490B;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1C5B3B;
+  --secondary-foreground: #FFFFFF;
+  --muted: #F3F7F4;
+  --muted-foreground: #52665A;
+  --accent: #FFF2E8;
+  --accent-foreground: #A83F08;
+  --destructive: #B42318;
+  --destructive-foreground: #FFFFFF;
+  --border: #DCE6DF;
+  --input: #DCE6DF;
+  --input-background: #FFFFFF;
+  --switch-background: #C6D9CB;
+  --ring: #BE490B;
+  --chart-1: #D45B0D;
+  --chart-2: #1C5B3B;
+  --chart-3: #103D22;
+  --chart-4: #F3B267;
+  --chart-5: #70A684;
+  --sidebar: #F3F7F4;
+  --sidebar-foreground: #103D22;
+  --sidebar-primary: #BE490B;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E8F1EB;
+  --sidebar-accent-foreground: #103D22;
+  --sidebar-border: #DCE6DF;
+  --sidebar-ring: #BE490B;
+  --section-background: #EAF2EC;
+  --contact-background: #FFF5EB;
+  --brand-green: #103D22;
+  --brand-green-rgb: 16,61,34;
+  --brand-orange-rgb: 212,91,13;
+  --text-rgb: 16,61,34;
+  --hero-foreground: #101E0F;
+  --hero-muted: #244831;
+  --hero-overlay: linear-gradient(90deg, rgba(222,235,219,0.98) 0%, rgba(222,235,219,0.92) 38%, rgba(175,202,168,0.38) 68%, rgba(20,55,30,0.12) 100%);
+  --hero-shade: linear-gradient(to bottom, rgba(230,239,225,0.80) 0%, transparent 22%, transparent 88%, #FFFFFF 100%);
+  --hero-panel: rgba(255,255,255,0.94);
+  --on-brand: #FFFFFF;
+  --footer-background: #0D351D;
+  color-scheme: light;
+}
+
+.dark {
+  --hero-foreground: var(--foreground);
+  --hero-muted: var(--muted-foreground);
+  --background: #081A12;
+  --foreground: #EDF6EF;
+  --card: #102A1D;
+  --card-foreground: #EDF6EF;
+  --popover: #102A1D;
+  --popover-foreground: #EDF6EF;
+  --primary: #F3A261;
+  --primary-foreground: #251307;
+  --secondary: #8FC6A3;
+  --secondary-foreground: #081A12;
+  --muted: #183425;
+  --muted-foreground: #ACC2B3;
+  --accent: #36271B;
+  --accent-foreground: #FFC18D;
+  --destructive: #FF9389;
+  --destructive-foreground: #28100D;
+  --border: #2C4937;
+  --input: #3B5845;
+  --input-background: #0C2116;
+  --switch-background: #3B5845;
+  --ring: #F3A261;
+  --chart-1: #F3A261;
+  --chart-2: #8FC6A3;
+  --chart-3: #EDF6EF;
+  --chart-4: #E38039;
+  --chart-5: #5B9870;
+  --sidebar: #0C2116;
+  --sidebar-foreground: #EDF6EF;
+  --sidebar-primary: #F3A261;
+  --sidebar-primary-foreground: #251307;
+  --sidebar-accent: #183425;
+  --sidebar-accent-foreground: #EDF6EF;
+  --sidebar-border: #2C4937;
+  --sidebar-ring: #F3A261;
+  --section-background: #112C1E;
+  --contact-background: #211F16;
+  --brand-green: #8FC6A3;
+  --brand-green-rgb: 143,198,163;
+  --brand-orange-rgb: 243,162,97;
+  --text-rgb: 237,246,239;
+  --hero-overlay: linear-gradient(90deg, rgba(8,26,18,0.96) 0%, rgba(8,26,18,0.84) 38%, rgba(8,26,18,0.45) 68%, rgba(8,26,18,0.20) 100%);
+  --hero-shade: linear-gradient(to bottom, rgba(8,26,18,0.92) 0%, transparent 22%, transparent 85%, #081A12 100%);
+  --hero-panel: rgba(16,42,29,0.96);
+  --on-brand: #FFFFFF;
+  --footer-background: #05120B;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
+
+/* Farmer dashboard preview: scoped motion, with a reduced-motion alternative. */
+.dashboard-header { background: #193F30; }
+.dashboard-value { animation: dashboard-value-in 650ms cubic-bezier(.22,1,.36,1) both; }
+.dashboard-content { animation: dashboard-view-in 280ms ease-out both; }
+.dashboard-sync { animation: dashboard-sync 7s ease-in-out infinite; }
+@keyframes dashboard-value-in { from { opacity: .25; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dashboard-view-in { from { opacity: .4; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dashboard-sync { 0%, 75% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .farmer-dashboard *, .farmer-dashboard *::before { animation: none !important; transition: none !important; } }
+
+/* Layered preview: the decorative cards never intercept pointer events. */
+.dashboard-stack { position: relative; width: 100%; max-width: 390px; margin-inline: auto; perspective: 1200px; isolation: isolate; }
+.dashboard-stack::before, .dashboard-stack::after { content: ""; position: absolute; inset: 8px 0; border-radius: 28px; pointer-events: none; transition: transform 500ms cubic-bezier(.22,1,.36,1), box-shadow 500ms; }
+.dashboard-stack::before { background: #D97732; transform: translate(14px, 5px) rotate(3deg); opacity: .72; z-index: -2; }
+.dashboard-stack::after { background: #245D42; transform: translate(-12px, 0) rotate(-3deg); z-index: -1; }
+.dashboard-stack .farmer-dashboard { position: relative; transition: transform 500ms cubic-bezier(.22,1,.36,1), box-shadow 500ms; }
+.dashboard-stack:focus-within .farmer-dashboard { transform: translateY(-3px); }
+@media (hover: hover) and (pointer: fine) {
+  .dashboard-stack:hover::before { transform: translate(23px, 7px) rotate(5deg); }
+  .dashboard-stack:hover::after { transform: translate(-21px, 2px) rotate(-5deg); }
+  .dashboard-stack:hover .farmer-dashboard { transform: translateY(-6px) rotateX(2deg); box-shadow: 0 28px 70px rgba(8,26,18,.24); }
+}
+@media (min-width: 1024px) { .hero-section > .relative { min-height: 100svh; } }
+@media (max-width: 480px) { .dashboard-stack { width: calc(100% - 22px); } }
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-stack *, .dashboard-stack::before, .dashboard-stack::after { transition: none !important; }
+  .dashboard-stack:hover .farmer-dashboard, .dashboard-stack:focus-within .farmer-dashboard { transform: none; }
+}
+
+/* Keep the entire preview readable within a typical laptop viewport. */
+.farmer-dashboard p { line-height: 1.35; }
+.farmer-dashboard .dashboard-header { padding: 12px 16px; }
+.dashboard-header > div:first-child, .dashboard-header > div:nth-child(2) { margin-bottom: 8px; }
+.dashboard-header > div:nth-child(3) { padding-block: 6px; }
+.dashboard-header > div:last-child { margin-top: 8px; }
+.dashboard-content > button { padding: 10px 12px; }
+.dashboard-content > button h3 { font-size: 12px; line-height: 1.4; }
+.dashboard-content > button > div:first-child { margin-bottom: 5px; }
+.dashboard-cycle { padding: 8px 12px; }
+.dashboard-cycle > p { margin-bottom: 4px; }
+.dashboard-cycle > div { padding-block: 2px; }
+
+
+/* Optional dashboard entrance. Remove this block to undo the visual effect. */
+@media (prefers-reduced-motion: no-preference) {
+  .dashboard-reveal { perspective: 1400px; }
+  .dashboard-reveal > .dashboard-stack {
+    transform-origin: 50% 70%;
+    animation: dashboard-reveal-arrive 1100ms cubic-bezier(.16,1,.3,1) 100ms backwards;
+  }
+  .dashboard-reveal .dashboard-stack::before {
+    animation: dashboard-reveal-orange 950ms cubic-bezier(.22,1,.36,1) 300ms backwards;
+  }
+  .dashboard-reveal .dashboard-stack::after {
+    animation: dashboard-reveal-green 950ms cubic-bezier(.22,1,.36,1) 220ms backwards;
+  }
+  .dashboard-reveal .dashboard-header {
+    animation: dashboard-reveal-content 650ms ease-out 380ms backwards;
+  }
+  .dashboard-reveal .dashboard-content {
+    animation: dashboard-reveal-content 700ms cubic-bezier(.22,1,.36,1) 520ms backwards;
+  }
+  .dashboard-reveal .dashboard-content > button:nth-child(2) {
+    animation: dashboard-reveal-content 650ms ease-out 650ms backwards;
+  }
+  /* Interaction immediately reveals content, even during the entrance. */
+  .dashboard-reveal:focus-within > .dashboard-stack,
+  .dashboard-reveal:focus-within .dashboard-header,
+  .dashboard-reveal:focus-within .dashboard-content,
+  .dashboard-reveal:focus-within .dashboard-content > button { animation: none; }
+}
+@keyframes dashboard-reveal-arrive {
+  0% { opacity: 0; transform: translate3d(0, 42px, -70px) rotateX(9deg) rotateZ(2deg) scale(.94); }
+  65% { opacity: 1; }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0) rotateZ(0) scale(1); }
+}
+@keyframes dashboard-reveal-orange {
+  from { opacity: 0; transform: translate(0, 18px) rotate(0) scale(.97); }
+  to { opacity: .72; transform: translate(14px, 5px) rotate(3deg); }
+}
+@keyframes dashboard-reveal-green {
+  from { opacity: 0; transform: translate(0, 14px) rotate(0) scale(.98); }
+  to { opacity: 1; transform: translate(-12px, 0) rotate(-3deg); }
+}
+@keyframes dashboard-reveal-content {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Cowries: understated brand accents on the three white section backgrounds. */
+.cowrie-surface { position: relative; isolation: isolate; }
+.cowrie-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("../assets/si-tcha-cauris-v1.webp"), url("../assets/si-tcha-cauris-v1.webp");
+  background-repeat: no-repeat;
+  background-size: 480px 480px, 420px 420px;
+  background-position: left -100px top -90px, right -70px bottom -100px;
+  opacity: .085;
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent 43%, transparent 57%, #000);
+  mask-image: linear-gradient(90deg, #000, transparent 43%, transparent 57%, #000);
+}
+.cowrie-surface > div { position: relative; z-index: 1; }
+.cowrie-surface[aria-labelledby="audience-title"]::before {
+  background-position: left -140px bottom -100px, right -100px top -80px;
+  background-size: 420px 420px, 480px 480px;
+}
+.dark .cowrie-surface::before { display: none; }
+@media (max-width: 640px) {
+  .cowrie-surface::before, .cowrie-surface[aria-labelledby="audience-title"]::before {
+    background-size: 280px 280px, 250px 250px;
+    background-position: left -100px top -35px, right -85px bottom -45px;
+    opacity: .065;
+  }
+}
+
