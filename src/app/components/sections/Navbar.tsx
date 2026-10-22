@@ -137,6 +137,8 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
           className={`md:hidden ${scrolled ? "text-foreground" : "text-foreground"}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
         >
           {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -144,7 +146,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
 
       {/* Mobile drawer */}
       {menuOpen && (
-        <div className="md:hidden bg-card border-t border-border px-6 py-5 flex flex-col gap-4 shadow-lg">
+        <div id="mobile-navigation" className="md:hidden bg-card border-t border-border px-6 py-5 flex flex-col gap-4 shadow-lg">
           {["Home", "Pilot", "About", "Investors", "Partners", "Contact"].map((item) => (
             <a key={item} aria-current={activeSection === item ? "location" : undefined} href={navLinks[item] || "#"} onClick={() => setMenuOpen(false)}
               className="section-nav-link self-start text-sm font-medium text-foreground hover:text-primary transition-colors">

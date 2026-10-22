@@ -50,7 +50,7 @@ export default function ContactSection() {
             {"Let’s turn demand into opportunity."}
           </h2>
           <p className="text-muted-foreground mt-3 text-sm max-w-lg mx-auto leading-relaxed">
-            {"Represent a farming group? Need a dependable crop supply? Bring agronomic expertise or investment capital? Tell us where you fit, and let’s discuss the next step."}
+            <span className="hidden md:inline">{"Represent a farming group? Need a dependable crop supply? Bring agronomic expertise or investment capital? Tell us where you fit, and let’s discuss the next step."}</span><span className="md:hidden">Farmer, buyer, agronomist or investor? Let’s talk.</span>
           </p>
         </div>
 

@@ -1,3 +1,4 @@
+import ResponsiveCard from "./ResponsiveCard";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useWeglot } from "../../hooks/useWeglot";
@@ -35,10 +36,9 @@ export default function InvestorsSection() {
             { title: t("Next steps", "Les prochaines étapes"), body: t("Develop the app, buyer partnerships and GIC support.", "Développer l’application, les partenariats acheteurs et l’accompagnement des GIC.") },
             { title: t("Measurable impact", "Un impact mesurable"), body: t("Track sales, farmer margins and post-harvest losses.", "Suivre les ventes, les marges agricoles et les pertes après récolte.") },
           ].map(({ title, body }, index) => (
-            <div key={index} style={{ animationDelay: `${index * 80}ms` }} className="investor-reveal bg-card border border-border rounded-2xl p-5">
-              <h3 className="font-bold text-base mb-2">{title}</h3>
+            <ResponsiveCard key={index} group="investors" className="investor-reveal" header={<h3 className="font-bold text-base">{title}</h3>}>
               <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
-            </div>
+            </ResponsiveCard>
           ))}
         </div>
       </div>

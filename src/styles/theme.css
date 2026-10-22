@@ -353,3 +353,95 @@
 
 @keyframes investor-text-reveal { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @media (prefers-reduced-motion: no-preference) { #investors[data-revealed="true"] .investor-reveal { animation: investor-text-reveal 600ms cubic-bezier(.22,1,.36,1) both; } }
+
+/* Responsive card disclosures: the same content remains available on every screen. */
+.responsive-card { min-width: 0; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); }
+.responsive-card > summary { display: flex; align-items: center; gap: .75rem; list-style: none; padding: 1.5rem 1.5rem .75rem; pointer-events: none; }
+.responsive-card > summary::-webkit-details-marker { display: none; }
+.responsive-card-content { padding: 0 1.5rem 1.5rem; }
+.accordion-chevron { display: none; transition: transform 200ms ease; }
+.approach-accordion > summary { padding: 1rem 1rem .5rem; }
+.approach-accordion > .responsive-card-content { padding: 0 1rem 1rem; }
+.dashboard-accordion { display: contents; }
+.dashboard-accordion > summary { display: none; }
+.dashboard-accordion > .responsive-card-content { display: contents; }
+@media (max-width: 767px) {
+  main > section { padding: 2rem 1rem; scroll-margin-top: 4rem; }
+  main > section > div, main .grid > *, footer .grid > * { min-width: 0; }
+  main > section h2 { font-size: 1.6rem; line-height: 1.2; }
+  main > section :is(.gap-16,.gap-12,.gap-6) { gap: 1rem; }
+  main > section :is(.mb-12,.mb-10) { margin-bottom: 1.25rem; }
+  main > section .cowrie-copy { padding: 1rem; margin-bottom: 1rem; }
+  main > section p { overflow-wrap: break-word; }
+  .responsive-card > summary { padding: 1rem; pointer-events: auto; cursor: pointer; min-height: 56px; }
+  .responsive-card > summary:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 1rem; }
+  .responsive-card > .responsive-card-content { padding: 0 1rem 1rem; }
+  .responsive-card .accordion-chevron { display: block; }
+  .responsive-card[open] > summary .accordion-chevron { transform: rotate(180deg); }
+  .responsive-card summary h3 { font-size: .95rem; line-height: 1.35; margin: 0; }
+  .responsive-card summary p { font-size: .65rem; margin-bottom: .375rem; }
+  .responsive-card summary svg.mb-3 { display: none; }
+  .partner-accordion > summary > div { display: grid; grid-template-columns: 64px minmax(0,1fr); align-items: center; gap: .75rem; }
+  .partner-accordion .partner-logo { width: 64px; height: 44px; padding: .25rem; margin: 0; }
+  .partner-accordion .partner-role { display: none; }
+  .ecosystem-illustration { display: none; }
+  .hero-section { min-height: 0; padding-top: 5.25rem; padding-bottom: 2rem; }
+  .hero-section > .relative { padding: 0; gap: 1.25rem; }
+  .hero-section h1 { font-size: clamp(1.8rem, 8vw, 2.25rem); margin-bottom: 1rem; }
+  .hero-section .mb-7 { margin-bottom: 1rem; }
+  .hero-section > .relative > div:first-child > p { font-size: .95rem; margin-bottom: 1.25rem; }
+  .hero-section .flex-wrap { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .625rem; }
+  .hero-section .site-cta { width: 100%; min-height: 52px; padding: .625rem; font-size: .75rem; gap: .25rem; line-height: 1.35; }
+  .hero-section .site-cta svg { width: 14px; flex-shrink: 0; }
+  .dashboard-accordion { display: block; background: var(--hero-panel); }
+  .dashboard-accordion > summary { display: flex; }
+  .dashboard-accordion > .responsive-card-content { display: block; padding: .5rem .75rem 1rem; }
+  .dashboard-stack { width: calc(100% - 20px); max-width: 340px; }
+  .dashboard-stack::before { transform: translate(8px,3px) rotate(2deg); }
+  .dashboard-stack::after { transform: translate(-7px,0) rotate(-2deg); }
+  .dashboard-header > div:nth-child(3) { flex-wrap: wrap; }
+  .dashboard-header > div:nth-child(3) > span:first-child { flex-wrap: wrap; gap: .25rem; }
+  #investors > .grid { gap: 1.5rem; }
+  #investors .grid.sm\:grid-cols-2 { grid-template-columns: 1fr; }
+  #contact > div > .grid > div:first-child > h3, #contact > div > .grid > div:first-child > div:last-child { display: none; }
+  #contact > div > .grid > div:first-child { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+  #contact > div > .grid > div:first-child > a { padding: .75rem; gap: .5rem; }
+  #contact > div > .grid > div:first-child > a > div:first-child { display: none; }
+  #contact > div > .grid > div:first-child > a > svg { display: none; }
+  #contact > div > .grid > div:first-child > a .text-sm { font-size: .7rem; overflow-wrap: anywhere; }
+  #contact .react-interactive { padding: 1rem; }
+  #contact form { gap: .875rem; }
+  #contact form > .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem; }
+  #contact form :is(input,textarea) { min-width: 0; font-size: 16px; }
+  #contact form textarea { height: 88px; min-height: 88px; }
+  footer { padding: 2rem 1rem !important; }
+  footer > div > .grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem; }
+  footer > div > .grid > div:first-child { grid-column: 1 / -1; }
+  footer > div > .grid > div:first-child > :not(:first-child) { display: none; }
+  footer .mb-5 { margin-bottom: .75rem; }
+  footer .pt-8 { padding-top: 1.25rem; }
+  footer .mb-10 { margin-bottom: 1.5rem; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
+  .responsive-card[open] > .responsive-card-content { animation: mobile-card-open 240ms ease-out; }
+}
+@keyframes mobile-card-open { from { opacity: .4; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 767px) {
+  html:not(.dark) .hero-section { --hero-overlay: linear-gradient(90deg, rgba(241,248,236,.96), rgba(241,248,236,.76)); }
+  #contact .mb-16 { margin-bottom: 1.25rem; }
+  #contact .react-interactive { min-height: 0; }
+  #contact form { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #contact form > :is(.grid,.hidden,.flex-1,p,button) { grid-column: 1 / -1; }
+  #contact form > .flex-1 { flex: none; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-section > .relative { grid-template-columns: minmax(0,1fr) 320px; gap: 1.5rem; }
+  .hero-section h1 { font-size: 2rem; }
+  .hero-section .site-cta { width: 100%; }
+  .hero-section .flex-wrap { display: grid; grid-template-columns: 1fr; }
+  .hero-section .hero-stats { gap: 1rem; }
+  .hero-section .hero-stats .text-2xl { font-size: 1.25rem; }
+  .ecosystem-illustration { display: none; }
+}

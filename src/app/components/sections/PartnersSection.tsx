@@ -1,3 +1,4 @@
+import ResponsiveCard from "./ResponsiveCard";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import AuCieffaLogo from "@/assets/au-cieffa.jpg";
 import AfribaPayLogo from "@/assets/afribapay.jpg";
@@ -38,19 +39,19 @@ export default function PartnersSection() {
         <div className="cowrie-copy text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-semibold tracking-widest uppercase text-primary">Our partner ecosystem</span>
           <h2 className="text-3xl lg:text-4xl font-bold mt-2">The partnerships behind every growing season.</h2>
-          <p className="text-muted-foreground mt-4 text-sm max-w-2xl mx-auto leading-relaxed">From mentorship and farmer communication to payments and access to funding programs, our partners help connect production with markets and stronger cooperative finances.</p>
+          <p className="text-muted-foreground mt-4 text-sm max-w-2xl mx-auto leading-relaxed"><span className="hidden md:inline">From mentorship and farmer communication to payments and access to funding programs, our partners help connect production with markets and stronger cooperative finances.</span><span className="md:hidden">Mentorship, payments, public programs and SMS: complementary expertise.</span></p>
         </div>
         <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {partners.map(({ name, logo, role, description }) => (
-            <article key={name} className="bg-card border border-border rounded-2xl p-7">
-              <div className="w-48 h-24 rounded-xl bg-white border border-border/50 p-3 mb-6 flex items-center justify-center">
+            <ResponsiveCard key={name} group="partners" className="partner-accordion" header={<>
+              <div className="partner-logo w-48 h-24 rounded-xl bg-white border border-border/50 p-3 mb-6 flex items-center justify-center">
                 <ImageWithFallback src={logo} alt={`${name} logo`} className="max-w-full max-h-full object-contain" loading="lazy" />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{role}</p>
-              <h3 className="font-bold text-xl mb-3">{name}</h3>
+              <p className="partner-role text-xs font-semibold uppercase tracking-widest text-primary mb-2">{role}</p>
+              <h3 className="font-bold text-xl">{name}</h3>
+            </>}>
               <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
-
-            </article>
+            </ResponsiveCard>
           ))}
         </div>
       </div>

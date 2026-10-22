@@ -1,3 +1,4 @@
+import ResponsiveCard from "./ResponsiveCard";
 import type { ElementType } from "react";
 import { Wifi, MessageSquare, FileCheck, Shield, Leaf, Users, TrendingUp } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
@@ -25,7 +26,7 @@ export default function AboutSection() {
             {"Start with a market. Support every growing decision."}
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-10 text-base">
-            {"Growing without a buyer exposes farmers to uncertain prices and unsold harvests. Si-Tcha brings farmers, buyers, and agronomists into one coordinated process: align demand before planting, support production with data, and help informal groups build the legal structure to access formal markets."}
+            <span className="hidden md:inline">{"Growing without a buyer exposes farmers to uncertain prices and unsold harvests. Si-Tcha brings farmers, buyers, and agronomists into one coordinated process: align demand before planting, support production with data, and help informal groups build the legal structure to access formal markets."}</span><span className="md:hidden">Align buyer demand, field advice and support for farming groups.</span>
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -37,24 +38,16 @@ export default function AboutSection() {
 ].map((pillar) => {
               const Icon = iconMap[pillar.icon];
               return (
-                <div key={pillar.label}
-                  className="flex gap-3.5 p-4 rounded-xl border border-border bg-card transition-all hover:border-primary/40">
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: "rgba(var(--brand-orange-rgb),0.12)" }}>
-                    <Icon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-foreground">{pillar.label}</div>
-                    <div className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{pillar.desc}</div>
-                  </div>
-                </div>
+                <ResponsiveCard key={pillar.label} group="approach" className="approach-accordion" header={<div className="flex items-center gap-3"><Icon className="w-5 h-5 shrink-0 text-primary" /><h3 className="text-sm font-semibold">{pillar.label}</h3></div>}>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{pillar.desc}</p>
+                </ResponsiveCard>
               );
             })}
           </div>
         </div>
 
         {/* Right: ecosystem diagram */}
-        <div className="flex items-center justify-center">
+        <div className="ecosystem-illustration flex items-center justify-center">
           <div className="relative w-full max-w-[420px] aspect-square rounded-3xl overflow-hidden border border-border"
             style={{ background: "linear-gradient(135deg, rgba(var(--brand-green-rgb),0.05), rgba(var(--brand-orange-rgb),0.08))" }}>
             <img

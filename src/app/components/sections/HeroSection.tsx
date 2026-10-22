@@ -1,3 +1,4 @@
+import ResponsiveCard from "./ResponsiveCard";
 import { useWeglot } from "../../hooks/useWeglot";
 import FarmerDashboard from "./FarmerDashboard";
 import { ArrowRight, Zap } from "lucide-react";
@@ -49,7 +50,8 @@ export default function HeroSection() {
 
           <p className="text-base lg:text-lg leading-relaxed mb-10 max-w-xl"
             style={{ color: "var(--hero-muted)" }}>
-            {"Connect farmers with buyers before planting. Si-Tcha AI brings market coordination, agronomic intelligence, and SMS advice together so cooperatives can plan production around demand and reduce the uncertainty of selling after harvest."}
+            <span className="hidden md:inline">{"Connect farmers with buyers before planting. Si-Tcha AI brings market coordination, agronomic intelligence, and SMS advice together so cooperatives can plan production around demand and reduce the uncertainty of selling after harvest."}</span>
+            <span className="md:hidden">Connect farmers, buyers and agronomists before planting, with advice accessible by SMS.</span>
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -67,7 +69,7 @@ export default function HeroSection() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-8 pt-6"
+          <div className="hero-stats hidden md:grid grid-cols-3 gap-8 mt-8 pt-6"
             style={{ borderTop: "1px solid rgba(var(--text-rgb),0.1)" }}>
             {[{ val: "5", label: "GICs in the pilot" }, { val: "Highlands", label: "Cameroon pilot region" }, { val: "SMS", label: "Reaching basic phones" }].map((s) => (
               <div key={s.label}>
@@ -78,7 +80,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="relative z-10 w-full min-w-0"><FarmerDashboard /></div>
+        <div className="relative z-10 w-full min-w-0"><ResponsiveCard group="dashboard" className="dashboard-accordion" header={<span translate="no" className="font-semibold">{lang === "fr" ? "Explorer le tableau de bord" : "Explore the dashboard"}</span>}><FarmerDashboard /></ResponsiveCard></div>
       </div>
 
       {/* Bottom fade */}

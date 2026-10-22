@@ -1,3 +1,4 @@
+import ResponsiveCard from "./ResponsiveCard";
 import { Users, ShoppingBasket, Leaf } from "lucide-react";
 
 export default function AudienceSection() {
@@ -14,13 +15,14 @@ export default function AudienceSection() {
             { icon: ShoppingBasket, role: "For buyers & wholesalers", title: "Plan supply before the harvest.", body: "Engage organized farming groups earlier. Align crop needs, expected volumes, and timing before planting, with the aim of building more predictable sourcing relationships.", cta: "Discuss your sourcing needs" },
             { icon: Leaf, role: "For agronomists", title: "Bring expertise closer to the field.", body: "Combine your local knowledge with satellite and predictive insights to guide crop monitoring and timely advice. Help turn complex data into decisions farmers can act on.", cta: "Explore agronomic collaboration" },
           ].map(({ icon: Icon, role, title, body, cta }, index) => (
-            <article key={role} className="border border-border rounded-2xl p-7 bg-card flex flex-col">
-              <Icon className="w-6 h-6 text-primary mb-5" />
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">{role}</p>
-              <h3 className="text-xl font-bold mb-4">{title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{body}</p>
+            <ResponsiveCard key={role} group="audience" header={<>
+              <Icon className="w-6 h-6 text-primary mb-3" />
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-2">{role}</p>
+              <h3 className="text-xl font-bold">{title}</h3>
+            </>}>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{body}</p>
               <a href={["/en/farmers-groups/", "/en/buyers/", "/en/agronomists/"][index]} className="text-sm font-semibold text-primary">{cta} →</a>
-            </article>
+            </ResponsiveCard>
           ))}
         </div>
       </div>
