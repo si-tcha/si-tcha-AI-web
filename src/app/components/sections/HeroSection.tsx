@@ -1,3 +1,4 @@
+import HeroMessages from "./HeroMessages";
 import ResponsiveCard from "./ResponsiveCard";
 import { useWeglot } from "../../hooks/useWeglot";
 import FarmerDashboard from "./FarmerDashboard";
@@ -43,16 +44,7 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <h1 className="text-4xl lg:text-5xl xl:text-[3.25rem] font-bold leading-[1.12] tracking-tight mb-6 max-w-2xl"
-            style={{ color: "var(--hero-foreground)" }}>
-            {"Sell before you produce."}
-          </h1>
-
-          <p className="text-base lg:text-lg leading-relaxed mb-10 max-w-xl"
-            style={{ color: "var(--hero-muted)" }}>
-            <span className="hidden md:inline">{"Connect farmers with buyers before planting. Si-Tcha AI brings market coordination, agronomic intelligence, and SMS advice together so cooperatives can plan production around demand and reduce the uncertainty of selling after harvest."}</span>
-            <span className="md:hidden">Connect farmers, buyers and agronomists before planting, with advice accessible by SMS.</span>
-          </p>
+          <HeroMessages />
 
           <div className="flex flex-wrap gap-4">
             <a href="#investors" className="site-cta inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all active:scale-95 hover:brightness-110"
