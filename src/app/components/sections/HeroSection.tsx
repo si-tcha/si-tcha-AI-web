@@ -2,7 +2,7 @@ import HeroMessages from "./HeroMessages";
 import ResponsiveCard from "./ResponsiveCard";
 import { useWeglot } from "../../hooks/useWeglot";
 import FarmerDashboard from "./FarmerDashboard";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import BackgroundArea from "@/assets/area.webp";
 
 export default function HeroSection() {
@@ -35,15 +35,6 @@ export default function HeroSection() {
 
         {/* Left: headline */}
         <div>
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-7"
-            style={{ background: "rgba(var(--brand-orange-rgb),0.15)", borderColor: "rgba(var(--brand-orange-rgb),0.3)" }}>
-            <Zap className="w-3.5 h-3.5" style={{ color: "var(--primary)" }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "var(--primary)" }}>
-              {"From buyer demand to better harvests"}
-            </span>
-          </div>
-
           <HeroMessages />
 
           <div className="flex flex-wrap gap-4">

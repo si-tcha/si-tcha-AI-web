@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Pause, Play } from "lucide-react";
 import { useWeglot } from "../../hooks/useWeglot";
 
 const messages = [
@@ -11,30 +10,58 @@ const messages = [
 
 export default function HeroMessages() {
   const { lang } = useWeglot();
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [frame, setFrame] = useState({ index: 0, title: messages[0][lang][0], body: messages[0][lang][1] });
   useEffect(() => {
-    if (paused) return;
-    const timer = window.setInterval(() => {
-      if (!document.hidden) setActive(value => (value + 1) % messages.length);
-    }, 10000);
-    return () => window.clearInterval(timer);
-  }, [paused, active]);
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timer: ReturnType<typeof setTimeout>;
+    let index = 0, titleLength = 0, bodyLength = 0;
+    let phase: "title" | "body" | "hold" | "eraseBody" | "eraseTitle" = "title";
+    const publish = () => setFrame({ index, title: messages[index][lang][0].slice(0, titleLength), body: messages[index][lang][1].slice(0, bodyLength) });
+    const schedule = (delay: number) => { timer = setTimeout(tick, delay); };
+    const tick = () => {
+      if (document.hidden) { schedule(250); return; }
+      const [title, body] = messages[index][lang];
+      if (phase === "title") {
+        titleLength++;
+        publish();
+        if (titleLength >= title.length) { phase = "body"; schedule(350); }
+        else schedule(34);
+      } else if (phase === "body") {
+        bodyLength++;
+        publish();
+        if (bodyLength >= body.length) { phase = "hold"; schedule(5500); }
+        else schedule(/[,:;]/.test(body[bodyLength - 1]) ? 100 : 16);
+      } else if (phase === "hold") {
+        phase = "eraseBody"; schedule(0);
+      } else if (phase === "eraseBody") {
+        bodyLength = Math.max(0, bodyLength - 4); publish();
+        if (bodyLength === 0) { phase = "eraseTitle"; schedule(180); }
+        else schedule(20);
+      } else {
+        titleLength = Math.max(0, titleLength - 2); publish();
+        if (titleLength === 0) { index = (index + 1) % messages.length; phase = "title"; schedule(250); }
+        else schedule(25);
+      }
+    };
+    const restart = () => {
+      clearTimeout(timer);
+      index = 0; titleLength = 0; bodyLength = 0; phase = "title";
+      if (preference.matches) setFrame({ index: 0, title: messages[0][lang][0], body: messages[0][lang][1] });
+      else { publish(); schedule(250); }
+    };
+    restart();
+    preference.addEventListener("change", restart);
+    return () => { clearTimeout(timer); preference.removeEventListener("change", restart); };
+  }, [lang]);
   return (
-    <div translate="no" className="hero-messages" role="region" aria-label={lang === "fr" ? "Les quatre axes de Si-Tcha AI" : "The four pillars of Si-Tcha AI"} aria-roledescription={lang === "fr" ? "carrousel" : "carousel"}>
-      <div className="hero-message-grid" aria-live={paused ? "polite" : "off"}>
-        {messages.map((message, index) => {
-          const Heading = index === 0 ? "h1" : "h2";
-          return <div key={index} className="hero-message" data-active={active === index} aria-hidden={active !== index}>
-            <Heading className="hero-message-title font-bold tracking-tight" style={{ color: "var(--hero-foreground)" }}>{message[lang][0]}</Heading>
-            <p className="hero-message-body max-w-xl" style={{ color: "var(--hero-muted)" }}>{message[lang][1]}</p>
-          </div>;
-        })}
+    <div translate="no" className="hero-messages" aria-live="off">
+      <div className="hero-type-title-slot">
+        {messages.map((message, index) => <div key={index} className="hero-message-title hero-type-measure font-bold tracking-tight" aria-hidden="true">{message[lang][0]}</div>)}
+        <h1 className="hero-message-title font-bold tracking-tight" aria-label={messages[frame.index][lang][0]} style={{ color: "var(--hero-foreground)" }}><span aria-hidden="true">{frame.title}</span></h1>
       </div>
-      <div className="flex items-center gap-2 mb-6">
-        {messages.map((message, index) => <button key={index} type="button" className="hero-message-dot" aria-label={`${lang === "fr" ? "Afficher" : "Show"} : ${message[lang][0]}`} aria-pressed={active === index} onClick={() => setActive(index)}><span /></button>)}
-        <button type="button" className="hero-message-pause" aria-label={lang === "fr" ? (paused ? "Reprendre le défilement" : "Mettre en pause le défilement") : (paused ? "Resume slideshow" : "Pause slideshow")} aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? <Play size={14} /> : <Pause size={14} />}</button>
-        <span className="text-xs text-muted-foreground" aria-hidden="true">{active + 1} / 4</span>
+      <div className="hero-type-body-slot max-w-xl">
+        {messages.map((message, index) => <div key={index} className="hero-message-body hero-type-measure" aria-hidden="true">{message[lang][1]}</div>)}
+        <p className="hero-message-body" aria-label={messages[frame.index][lang][1]} style={{ color: "var(--hero-muted)" }}><span aria-hidden="true">{frame.body}</span></p>
       </div>
     </div>
   );
