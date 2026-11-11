@@ -1,3 +1,4 @@
+import PageLanguageSwitcher from "./PageLanguageSwitcher";
 import type { ReactNode } from "react";
 import { seoPages, type SeoPage as Page } from "../data/seoPages";
 import logo from "@/assets/logo.png";
@@ -9,7 +10,7 @@ export default function SeoPage({ page, languageSwitcher }: { page: Page; langua
       <header className="border-b border-border bg-background">
         <nav aria-label={french ? "Navigation principale" : "Main navigation"} className="max-w-5xl mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
           <a href="/" translate="no" data-brand className="flex items-center gap-3 font-bold"><img src={logo} width="40" height="40" alt="Si-Tcha AI" className="rounded-full" />Si-Tcha AI</a>
-          <div className="flex flex-wrap items-center gap-4 text-sm"><a href="/">{french ? "Accueil" : "Home"}</a>{page.alternate && <a href={page.alternate} hrefLang={french ? "en" : "fr"} lang={french ? "en" : "fr"}>{french ? "English" : "Français"}</a>}<a href="/#contact">Contact</a>{languageSwitcher}</div>
+          <div className="flex flex-wrap items-center gap-4 text-sm"><a href="/">{french ? "Accueil" : "Home"}</a><a href="/#contact">Contact</a>{languageSwitcher ?? (page.alternate && <PageLanguageSwitcher current={page.lang} links={{ fr: french ? page.path : page.alternate, en: french ? page.alternate : page.path }} />)}</div>
         </nav>
       </header>
       <main id="main-content" className="cowrie-surface max-w-5xl mx-auto px-6 py-16">
