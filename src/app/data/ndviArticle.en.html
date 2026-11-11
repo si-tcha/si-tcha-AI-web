@@ -1,0 +1,55 @@
+<h2>It starts with a green leaf</h2>
+<p>Have you noticed how a growing plant often has green leaves? Their colour comes partly from <strong>chlorophyll</strong>, a pigment that helps capture sunlight. Plants use this energy, water and carbon dioxide to make food through photosynthesis.</p>
+<p>Think of a leaf as a tiny kitchen: sunlight supplies the energy needed to prepare the plant’s food. Leaf colour is a useful clue, but yellowing alone cannot explain what is happening. Natural ageing, water supply, nutrition and disease can all play a part.</p>
+<p>At Si-Tcha AI, we start with this familiar observation to explain how technology can help us monitor vegetation remotely.</p>
+<h2>How can a satellite observe vegetation?</h2>
+<p>Sunlight includes light we can see and wavelengths invisible to our eyes. Leaves absorb some of this light and reflect some of it. Chlorophyll strongly absorbs <strong>visible red light</strong>. The internal structure of leaves influences how much <strong>near-infrared light</strong> they reflect.</p>
+<p>Some satellites carry sensors that measure both. They are like special glasses that collect information our eyes cannot see.</p>
+<figure class="article-figure"><a href="/images/articles/ndvi-reflectance-eosda.png" target="_blank" rel="noopener noreferrer" aria-label="Enlarge the EOSDA illustration"><img src="/images/articles/ndvi-reflectance-eosda.png" width="771" height="435" loading="lazy" decoding="async" alt="EOSDA illustration comparing red and near-infrared light reflected by two types of vegetation." /></a><figcaption>Source: <a href="https://eos.com/fr/make-an-analysis/ndvi/">EOS Data Analytics (EOSDA)</a>. Original illustration supplied in French. The red band should read <strong>visible red light</strong>. Percentages are illustrative, not universal values or a health diagnosis.</figcaption></figure>
+<h2>NDVI: an index for observing differences within a field</h2>
+<p>The <strong>Normalized Difference Vegetation Index (NDVI)</strong> compares red and near-infrared light reflected by a surface. You do not need to memorise its full name. Remember this:</p>
+<blockquote><strong>NDVI helps observe the presence and vigour of vegetation and how they change over time.</strong></blockquote>
+<p>It does not directly measure the chlorophyll in each leaf. Its value also depends on vegetation cover, its structure and the soil visible between plants. Software turns these values into a colour map that highlights differences within a field.</p>
+<p>Think of NDVI as a warning light on a vehicle dashboard. It draws attention to something worth checking without identifying the cause on its own.</p>
+<p>Values range from −1 to +1. There is no single number that means “healthy” for every crop and every season. <a href="https://eos.com/fr/make-an-analysis/ndvi/">NDVI explanations and limitations — EOSDA</a>.</p>
+<h2>Why compare several dates?</h2>
+<p>One map shows conditions at a particular moment. Several maps reveal change. Imagine two areas of maize planted at the same time. They initially develop similarly, but later usable images show an unusual decline in one area. This can help a farmer decide where to visit first.</p>
+<p>The cause must still be investigated: water shortage, fewer plants, nutrition, pests or something else. A decline may also reflect normal maturation or harvesting. <strong>Comparisons only make sense when field events are taken into account.</strong></p>
+<h2>What can NDVI help farmers do?</h2>
+<p>For Si-Tcha AI, digital information matters when it helps prepare a useful action.</p>
+<h3>1. Plan field visits</h3>
+<p>A map can highlight an area to inspect. The farmer can visit or ask someone nearby to check and send photographs. This preparation can be done from home with a phone, provided a service offering access to the maps is available.</p>
+<h3>2. Notice changes that deserve prompt attention</h3>
+<p>An unusual change can prompt an earlier field inspection. <strong>NDVI does not directly see a caterpillar or identify a disease.</strong> It can show vegetation changes once their effects are detectable in the imagery. It does not guarantee warnings before the first symptoms.</p>
+<h3>3. Examine differences in growth</h3>
+<p>Maps help locate areas growing differently and prepare checks of soil conditions, moisture, plant density and farming practices.</p>
+<h3>4. Prepare decisions about water and fertiliser</h3>
+<p>An anomaly can guide checks of moisture or nutrition. Alone, it is neither an irrigation recommendation nor a fertiliser prescription. <strong>Observe, compare, verify, then decide with appropriate agronomic advice.</strong></p>
+<h2>How can you read a map correctly?</h2>
+<figure class="article-figure"><a href="/images/articles/parcelle-si-tcha-agromonitoring.png" target="_blank" rel="noopener noreferrer" aria-label="Enlarge the Si-Tcha AI field on Agromonitoring"><img src="/images/articles/parcelle-si-tcha-agromonitoring.png" width="983" height="422" loading="lazy" decoding="async" alt="Si-Tcha AI field registered on Agromonitoring, with the NDVI layer, imagery dates and other available indices." /></a><figcaption>Si-Tcha AI field registered on <a href="https://agromonitoring.com/">Agromonitoring</a>. Screenshot supplied by Si-Tcha AI. NDVI is selected; other observations appear in the menu. Check the date, image quality and legend before interpretation. Select the image to enlarge it.</figcaption></figure>
+<p>Ask four questions before interpreting a map:</p>
+<ul><li><strong>When was the image taken?</strong> It may not show the field as it looks today.</li><li><strong>Is the image usable?</strong> Clouds and shadows can interfere.</li><li><strong>What does the legend mean?</strong> Colour alone cannot support a conclusion.</li><li><strong>What happened in the field?</strong> Sowing, weeding, harvesting or maturation can explain changes.</li></ul>
+<p>Small fields, nearby trees and mixed crops can also complicate interpretation. Satellite pixels represent areas and do not necessarily distinguish individual plants.</p>
+<h2>Other indices: different tools for different questions</h2>
+<p>A hammer does not replace a screwdriver. Agricultural monitoring indices are also complementary tools.</p>
+<div class="article-table"><table><caption>Vegetation indices and their complementary uses</caption><thead><tr><th scope="col">Index</th><th scope="col">Simple explanation</th><th scope="col">Main use</th></tr></thead><tbody>
+<tr><td>NDVI</td><td>An overview of vegetation and its changes.</td><td>Monitor development and identify differences.</td></tr>
+<tr><td>NDRE</td><td>An observation sensitive to chlorophyll variation, using another part of the spectrum.</td><td>Complement monitoring of well-developed vegetation.</td></tr>
+<tr><td>SAVI / MSAVI</td><td>Indices reducing the influence of exposed soil.</td><td>Observe sparse vegetation or young crops.</td></tr>
+<tr><td>EVI</td><td>A complement reducing some soil and atmospheric effects.</td><td>Monitor dense vegetation cover.</td></tr>
+<tr><td>NDMI</td><td>An index sensitive to vegetation moisture.</td><td>Investigate changes potentially linked to water stress.</td></tr>
+<tr><td>NDWI</td><td>A name used for several water-related formulations.</td><td>Depending on the formula, observe open water or water in vegetation.</td></tr>
+</tbody></table></div>
+<p>For NDWI, check the formula and service documentation to know what is represented. “True Color” is a natural-colour image, not a vegetation index. Choose indices according to the question, crop and growth stage. <a href="https://science.nasa.gov/mission/landsat/hls-vegetation-indices/">NASA guide</a>, <a href="https://eos.com/make-an-analysis/ndre/">NDRE — EOSDA</a>, <a href="https://eos.com/make-an-analysis/msavi/">MSAVI — EOSDA</a>.</p>
+<h2>What benefits can farmers expect?</h2>
+<p>Si-Tcha AI promotes better-informed decisions. Used well, indices can help:</p>
+<ul><li><strong>Save time</strong> by preparing visits and prioritising areas.</li><li><strong>Target inspections</strong> rather than searching a whole field at random.</li><li><strong>Use available resources more effectively</strong> through confirmed observations.</li><li><strong>Limit some field losses</strong> when problems are identified and addressed in time.</li><li><strong>Keep a history</strong> to compare seasons and understand development.</li></ul>
+<p>Results depend on data quality, interpretation and the actions possible in the field. NDVI guarantees neither a particular yield nor doubled sales.</p>
+<h2>What benefits for the environment?</h2>
+<p>When observations lead to targeted, agronomically justified actions, they can help avoid unnecessary watering, fertiliser without a confirmed need and treatments without diagnosis. They can also help track how farming practices affect vegetation cover.</p>
+<p><strong>Producing intelligently also means caring for the resources that make production possible.</strong> These benefits come from decisions made using maps, not from maps alone.</p>
+<h2>From your phone to the field</h2>
+<p>You do not need to become a satellite expert to understand the essentials:</p>
+<blockquote>Check a usable image → compare previous dates → identify changes → verify in the field → choose an appropriate action.</blockquote>
+<p>Chlorophyll helps explain leaves. NDVI broadens our view to a whole field. With Si-Tcha AI, explore how digital tools can support better production, preserve resources and inform African agriculture.</p>
+<p>Want more practical ideas for growing and selling better? Join the <a href="https://whatsapp.com/channel/0029Vb8tUdfDZ4LVLb1Q4Z1P/101">Si-Tcha AI WhatsApp channel</a>.</p>

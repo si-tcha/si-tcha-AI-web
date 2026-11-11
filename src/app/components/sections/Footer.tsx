@@ -81,7 +81,7 @@ export default function Footer() {
             {seoPages.filter(page => page.lang === lang || Boolean(page.articleHtml)).map(page => (
               <li key={page.path}>
                 <a className="hover:underline underline-offset-4" href={page.path} hrefLang={page.lang}>
-                  {page.articleHtml ? (lang === "fr" ? "Comprendre le NDVI" : "Understanding NDVI (French)") : pageLabels[page.path.split("/")[2]]}
+                  {page.articleHtml ? (lang === "fr" ? "Comprendre le NDVI" : "Understanding NDVI") : pageLabels[page.path.split("/")[2]]}
                 </a>
               </li>
             ))}

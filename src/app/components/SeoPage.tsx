@@ -1,14 +1,15 @@
+import type { ReactNode } from "react";
 import { seoPages, type SeoPage as Page } from "../data/seoPages";
 import logo from "@/assets/logo.png";
 
-export default function SeoPage({ page }: { page: Page }) {
+export default function SeoPage({ page, languageSwitcher }: { page: Page; languageSwitcher?: ReactNode }) {
   const french = page.lang === "fr";
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border bg-background">
         <nav aria-label={french ? "Navigation principale" : "Main navigation"} className="max-w-5xl mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-4">
-          <a href="/" className="flex items-center gap-3 font-bold"><img src={logo} width="40" height="40" alt="Si-Tcha AI" className="rounded-full" />Si-Tcha AI</a>
-          <div className="flex gap-5 text-sm"><a href="/">{french ? "Accueil" : "Home"}</a>{page.alternate && <a href={page.alternate} hrefLang={french ? "en" : "fr"} lang={french ? "en" : "fr"}>{french ? "English" : "Français"}</a>}<a href="/#contact">Contact</a></div>
+          <a href="/" translate="no" data-brand className="flex items-center gap-3 font-bold"><img src={logo} width="40" height="40" alt="Si-Tcha AI" className="rounded-full" />Si-Tcha AI</a>
+          <div className="flex flex-wrap items-center gap-4 text-sm"><a href="/">{french ? "Accueil" : "Home"}</a>{page.alternate && <a href={page.alternate} hrefLang={french ? "en" : "fr"} lang={french ? "en" : "fr"}>{french ? "English" : "Français"}</a>}<a href="/#contact">Contact</a>{languageSwitcher}</div>
         </nav>
       </header>
       <main id="main-content" className="cowrie-surface max-w-5xl mx-auto px-6 py-16">
@@ -17,7 +18,7 @@ export default function SeoPage({ page }: { page: Page }) {
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-4">Si-Tcha AI · {french ? "Cameroun" : "Cameroon"}</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">{page.heading}</h1>
           <p className="text-lg text-muted-foreground leading-relaxed mb-12">{page.intro}</p>
-          {page.articleHtml && <><p className="article-byline">Par Si-Tcha AI · Article pédagogique</p><div className="article-content" dangerouslySetInnerHTML={{ __html: page.articleHtml }} /></>}
+          {page.articleHtml && <><p className="article-byline">{french ? "Par Si-Tcha AI · Article pédagogique" : "By Si-Tcha AI · Educational article"}</p><div className="article-content" dangerouslySetInnerHTML={{ __html: page.articleHtml }} /></>}
           {page.sections.map(section => <section key={section.title} className="mb-9"><h2 className="text-2xl font-bold mb-3">{section.title}</h2><p className="text-muted-foreground leading-relaxed">{section.body}</p></section>)}
           <a href="/#contact" className="inline-block bg-primary text-primary-foreground rounded-xl px-6 py-4 font-semibold">{page.cta}</a>
         </article>

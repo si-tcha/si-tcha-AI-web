@@ -1,3 +1,4 @@
+import ArticlePage from "./components/ArticlePage";
 import { useEffect, useState } from "react";
 import Navbar from "./components/sections/Navbar";
 import HeroSection from "./components/sections/HeroSection";
@@ -26,6 +27,7 @@ export default function App({ path = "/" }: { path?: string }) {
     document.querySelector('meta[name="description"]')?.setAttribute("content", page.description);
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", `https://si-tcha.com${page.path}`);
   }, [page]);
+  if (page?.articleHtml) return <ArticlePage page={page} />;
   if (page) return <SeoPage page={page} />;
 
   return (
