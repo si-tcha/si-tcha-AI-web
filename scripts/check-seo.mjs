@@ -7,7 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../dist
 const origin = 'https://si-tcha.com';
 const sitemap = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-assert.equal(urls.length, 13, 'Expected homepage and six bilingual page pairs');
+assert.equal(urls.length, 14, 'Expected homepage, six bilingual page pairs and NDVI article');
 assert.equal(new Set(urls).size, urls.length);
 const pages = new Map();
 for (const url of urls) {
@@ -47,7 +47,11 @@ for (const [pathname, html] of pages) {
     if (match[2] && pages.has(target)) assert(pages.get(target).includes(`id="${match[2].slice(1)}"`), `${pathname}: missing anchor ${target}${match[2]}`);
   }
   const alternates = [...html.matchAll(/<link rel="alternate" hreflang="(fr|en)" href="(.*?)"/g)];
-  if (pathname !== '/') {
+  if (pathname === '/blog/comprendre-ndvi-chlorophylle/') {
+    assert(html.includes('<html lang="fr">'));
+    assert(graph.some(item => item['@type'] === 'Article'));
+    assert(!html.includes('C:/Users/') && !html.includes('infrarouge visible'));
+  } else if (pathname !== '/') {
     assert.equal(alternates.length, 2, `${pathname}: missing bilingual alternate`);
     for (const [, lang, url] of alternates) {
       const alternatePath = new URL(url).pathname;

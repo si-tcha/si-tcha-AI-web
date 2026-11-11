@@ -78,10 +78,10 @@ export default function Footer() {
         <div translate="no" lang={lang} className="react-interactive mb-10 pt-8 border-t border-white/10">
           <p className="font-semibold mb-4">{lang === "fr" ? "Découvrir Si-Tcha AI" : "Explore Si-Tcha AI"}</p>
           <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
-            {seoPages.filter(page => page.lang === lang).map(page => (
+            {seoPages.filter(page => page.lang === lang || Boolean(page.articleHtml)).map(page => (
               <li key={page.path}>
-                <a className="hover:underline underline-offset-4" href={page.path} hrefLang={lang}>
-                  {pageLabels[page.path.split("/")[2]]}
+                <a className="hover:underline underline-offset-4" href={page.path} hrefLang={page.lang}>
+                  {page.articleHtml ? (lang === "fr" ? "Comprendre le NDVI" : "Understanding NDVI (French)") : pageLabels[page.path.split("/")[2]]}
                 </a>
               </li>
             ))}

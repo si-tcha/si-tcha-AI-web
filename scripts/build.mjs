@@ -33,6 +33,7 @@ for (const page of [home, ...seoPages]) {
     '@type': 'WebPage', '@id': canonical + '#page', url: canonical, name: page.title, description: page.description, inLanguage: page.lang,
     isPartOf: { '@id': `${origin}/#website` }, about: { '@id': organization['@id'] },
   }];
+  if (page.articleHtml) graph.push({ '@type': 'Article', '@id': canonical + '#article', headline: page.heading, description: page.description, inLanguage: page.lang, author: { '@id': organization['@id'] }, publisher: { '@id': organization['@id'] }, mainEntityOfPage: { '@id': canonical + '#page' } });
   if (page.path !== '/') graph.push({ '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: page.lang === 'fr' ? 'Accueil' : 'Home', item: origin + '/' },
     { '@type': 'ListItem', position: 2, name: page.heading, item: canonical },
@@ -43,7 +44,7 @@ for (const page of [home, ...seoPages]) {
     `<link rel="alternate" hreflang="x-default" href="${origin + (page.lang === 'en' ? page.path : page.alternate)}" />`,
   ].join('\n') : '';
   const head = `${alternates}
-<meta property="og:type" content="website" />
+<meta property="og:type" content="${page.articleHtml ? 'article' : 'website'}" />
 <meta property="og:site_name" content="Si-Tcha AI" translate="no" data-brand />
 <meta property="og:title" content="${escape(page.title)}" translate="no" data-brand />
 <meta property="og:description" content="${escape(page.description)}" />

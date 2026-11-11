@@ -1,6 +1,8 @@
+import ndviArticle from "./ndviArticle.html?raw";
 export interface SeoPage {
   path: string;
-  alternate: string;
+  alternate?: string;
+  articleHtml?: string;
   lang: "fr" | "en";
   title: string;
   description: string;
@@ -11,6 +13,14 @@ export interface SeoPage {
 }
 
 export const seoPages: SeoPage[] = [
+  {
+    path: "/blog/comprendre-ndvi-chlorophylle/", lang: "fr",
+    title: "Comprendre le NDVI et la chlorophylle | Si-Tcha AI",
+    description: "Si-Tcha AI explique simplement le NDVI, ses usages agricoles, les autres indices et leurs bénéfices possibles pour l’agriculteur et l’environnement.",
+    heading: "Du vert des feuilles aux images satellites : comprendre le NDVI avec Si-Tcha AI",
+    intro: "Une feuille verte peut nous apprendre beaucoup sur une plante. Mais comment observer tout un champ depuis chez soi ? Découvrez le lien entre la chlorophylle, les images satellites et le NDVI, avec des mots simples.",
+    sections: [], articleHtml: ndviArticle, cta: "Échanger avec Si-Tcha AI",
+  },
   {
     path: "/fr/agriculteurs-gic/", alternate: "/en/farmers-groups/", lang: "fr",
     title: "Agriculteurs et GIC au Cameroun — Si-Tcha AI",
