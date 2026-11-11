@@ -18,7 +18,7 @@ export default function InvestorsSection() {
   }, []);
   const t = (en: string, fr: string) => lang === "fr" ? fr : en;
   return (
-    <section ref={sectionRef} data-revealed={revealed} translate="no" id="investors" className="py-16 px-6" style={{ background: "var(--section-background)", scrollMarginTop: "4rem" }}>
+    <section ref={sectionRef} data-revealed={revealed} translate="no" id="investors" className="forest-section py-16 px-6" style={{ background: "var(--section-background)", scrollMarginTop: "4rem" }}>
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <div>
           <span className="text-xs font-semibold uppercase tracking-widest text-primary">{t("Investors & partners", "Investisseurs & partenaires")}</span>
@@ -34,7 +34,7 @@ export default function InvestorsSection() {
             { title: t("Market access", "Des débouchés"), body: t("Connect buyers and farmers before planting.", "Rapprocher acheteurs et producteurs avant les semis.") },
             { title: t("Rural access", "Un accès rural"), body: t("Combine satellite insights and advice by SMS.", "Associer suivi satellite et conseils par SMS.") },
             { title: t("Next steps", "Les prochaines étapes"), body: t("Develop the app, buyer partnerships and GIC support.", "Développer l’application, les partenariats acheteurs et l’accompagnement des GIC.") },
-            { title: t("Measurable impact", "Un impact mesurable"), body: t("Track sales, farmer margins and post-harvest losses.", "Suivre les ventes, les marges agricoles et les pertes après récolte.") },
+            { title: t("Measurable impact", "Un impact mesurable"), body: t("Track farmer income, crop losses and the use of water and inputs.", "Suivre les revenus agricoles, les pertes et l’usage de l’eau et des intrants.") },
           ].map(({ title, body }, index) => (
             <ResponsiveCard key={index} group="investors" className="investor-reveal" header={<h3 className="font-bold text-base">{title}</h3>}>
               <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>

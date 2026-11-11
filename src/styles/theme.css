@@ -490,3 +490,19 @@
 .hero-section .hero-stats .text-2xl { color: var(--hero-foreground) !important; }
 .hero-section .hero-stats .text-xs { color: var(--hero-muted) !important; }
 .hero-section .hero-stats { border-color: rgba(245,250,244,.2) !important; }
+
+/* Forest palette shared with the hero, scoped to these two sections. */
+.forest-section {
+  --section-background: #0B2D1B;
+  --background: #103824;
+  --foreground: #F5FAF4;
+  --card: #153E2B;
+  --card-foreground: #F5FAF4;
+  --muted: #204A35;
+  --muted-foreground: #CDDFD1;
+  --border: #42634D;
+  --primary: #F3A261;
+  --primary-foreground: #251307;
+  --ring: #F3A261;
+  color: var(--foreground);
+}
