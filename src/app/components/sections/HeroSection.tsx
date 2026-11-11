@@ -46,7 +46,7 @@ export default function HeroSection() {
             <a
               href="#contact"
               className="site-cta inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-              style={{ border: "1px solid var(--muted-foreground)", color: "var(--hero-foreground)" }}>
+              style={{ border: "1px solid var(--hero-muted)", color: "var(--hero-foreground)" }}>
               <span translate="no">{lang === "fr" ? "Nous rejoindre" : "Join us"}</span>
             </a>
           </div>
@@ -68,7 +68,7 @@ export default function HeroSection() {
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
-        style={{ background: "linear-gradient(to top, var(--background) 0%, transparent 100%)" }} />
+        style={{ background: "linear-gradient(to top, #0B2D1B 0%, transparent 100%)" }} />
     </section>
   );
 }

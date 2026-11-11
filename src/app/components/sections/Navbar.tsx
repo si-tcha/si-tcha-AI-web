@@ -49,7 +49,7 @@ export default function Navbar({ theme, setTheme }: NavbarProps) {
   }, []);
 
   return (
-    <nav translate="no" className={`react-interactive fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav translate="no" data-scrolled={scrolled} className={`react-interactive hero-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled
         ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-sm"
         : "bg-transparent"
